@@ -4,7 +4,7 @@
 
 Фронтенд сервиса для сервиса поиска фильмов **Movie Explorer** с возможностью аутентификации пользователей, сохранения фильмов в избранном и поиском фильмов по ключевым словам.
 
-[REST API для аутентификации пользователей и сохранением фильмов в избранном](https://github.com/MelnikovAleksei/movies-explorer-api/tree/level-1)
+[REST API для аутентификации пользователей и сохранения фильмов в избранном](https://github.com/MelnikovAleksei/movies-explorer-api/tree/level-1)
 
 Адрес домена сервера: `https://api.cinema-explorer.students.nomoredomains.icu/`
 
