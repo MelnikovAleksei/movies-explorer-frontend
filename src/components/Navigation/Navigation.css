@@ -1,0 +1,35 @@
+.navigation {
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 50px;
+}
+
+.navigation__link {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.29;
+  color: #000000;
+  text-decoration: none;
+  margin: 0 10px;
+  align-self: center;
+}
+
+.navigation__link_active {
+  font-weight: 500;
+}
+
+.navigation__link:first-of-type {
+  margin-left: 0;
+}
+
+.navigation__link:last-of-type {
+  margin-right: 0;
+}
+
+@media screen and (max-width: 1023px) {
+  .navigation {
+    display: none;
+  }
+}

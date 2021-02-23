@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 70px;
+  box-sizing: border-box;
+}
+
+.header__navigation-container {
+  display: flex;
+}
+
+@media screen and (max-width: 1023px) {
+  .header {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .header__navigation-container {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
