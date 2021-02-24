@@ -1,7 +1,6 @@
 .navigation {
-  display: flex;
   box-sizing: border-box;
-  padding: 0 50px;
+  padding: 10px 50px;
 }
 
 .navigation__link {
@@ -22,8 +21,7 @@
   font-weight: 500;
 }
 
-.navigation__link:hover,
-.navigation__link:focus {
+.navigation__link:hover {
   opacity: .7;
 }
 

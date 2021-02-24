@@ -4,6 +4,8 @@
   align-items: center;
   padding: 18px 70px;
   box-sizing: border-box;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .header__navigation-container {
@@ -14,10 +16,6 @@
   .header {
     padding-left: 30px;
     padding-right: 30px;
-  }
-
-  .header__navigation-container {
-    flex-direction: column;
   }
 }
 

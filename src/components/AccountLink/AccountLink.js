@@ -3,22 +3,38 @@ import { Link } from 'react-router-dom';
 
 import { ReactComponent as AccountIcon } from '../../images/AccountLink/account-link-icon.svg'
 
-const ACCOUNT_LINK_SETTINGS = {
-  PATH: '/profile',
-  TEXT: 'Аккаунт',
-};
 
-const AccountLink = React.memo(() => {
-  return (
+const AccountLink = React.memo((props) => {
+
+  const ACCOUNT_LINKS = [
+    {
+      id: 1,
+      link: '/profile',
+      title: 'Аккаунт',
+      className: 'account-link',
+      children: (
+        <AccountIcon
+          className="account-link__icon"
+        />
+      ),
+    },
+  ];
+
+  const acountLinksMarkup = ACCOUNT_LINKS.map((item) => (
     <Link
-      className="account-link"
-      to={ACCOUNT_LINK_SETTINGS.PATH}
+      key={item.id}
+      className={item.className}
+      to={item.link}
     >
-      {ACCOUNT_LINK_SETTINGS.TEXT}
-      <AccountIcon
-        className="account-link__icon"
-      />
+      {item.title}
+      {item.children}
     </Link>
+  ));
+
+  return (
+    <>
+      {acountLinksMarkup}
+    </>
   )
 });
 

@@ -12,8 +12,7 @@
   transition: opacity .3s ease;
 }
 
-.account-link:hover,
-.account-link:focus {
+.account-link:hover{
   opacity: .7;
 }
 
