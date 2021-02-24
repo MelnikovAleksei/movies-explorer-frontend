@@ -9,6 +9,8 @@ import MobileNavigation from '../MobileNavigation/MobileNavigation';
 
 import MobileAccountLink from '../MobileAccountLink/MobileAccountLink';
 
+import Main from '../Main/Main';
+
 function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -44,7 +46,7 @@ function App() {
           exact
           path="/"
         >
-          <h1>/</h1>
+          <Main />
         </Route>
         <Route
           path="/movies"
