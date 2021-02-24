@@ -1,7 +1,3 @@
-.auth-navigation {
-
-}
-
 .auth-navigation__link {
   font-family: 'Inter', Arial, sans-serif;
   font-weight: normal;
@@ -12,6 +8,13 @@
   text-decoration: none;
   padding: 8px 20px;
   margin: 0 5px;
+  opacity: 1;
+  transition: opacity .3s ease;
+}
+
+.auth-navigation__link:focus,
+.auth-navigation__link:hover {
+  opacity: .7;
 }
 
 .auth-navigation__link:first-of-type {

@@ -14,10 +14,17 @@
   text-decoration: none;
   margin: 0 10px;
   align-self: center;
+  opacity: 1;
+  transition: opacity .3s ease;
 }
 
 .navigation__link_active {
   font-weight: 500;
+}
+
+.navigation__link:hover,
+.navigation__link:focus {
+  opacity: .7;
 }
 
 .navigation__link:first-of-type {
