@@ -1,0 +1,64 @@
+.article-about {
+
+  max-width: 550px;
+  width: 100%;
+}
+
+.article-about__title {
+  margin: 0 0 26px 0;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #000000;
+  letter-spacing: -0.04em;
+}
+
+.article-about__text {
+  margin: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.43;
+  color: #000000;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 1279px) {
+  .article-about {
+    /*width: 319px;*/
+  }
+
+  .article-about__title {
+    margin-bottom: 22px;
+  }
+
+  .article-about__text {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .article-about {
+    /*width: 284px;*/
+  }
+
+  .article-about__title {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .article-about__text {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}
+
+@media screen and (max-width: 319px) {
+  .article-about {
+    width: 100%;
+  }
+}
