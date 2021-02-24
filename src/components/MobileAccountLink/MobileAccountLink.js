@@ -8,11 +8,12 @@ const MOBILE_ACCOUNT_LINK_SETTINGS = {
   TEXT: 'Аккаунт',
 };
 
-const MobileAccountLink = React.memo(() => {
+const MobileAccountLink = React.memo((props) => {
   return (
     <Link
       className="mobile-account-link"
       to={MOBILE_ACCOUNT_LINK_SETTINGS.PATH}
+      onClick={props.onModalClose}
     >
       {MOBILE_ACCOUNT_LINK_SETTINGS.TEXT}
       <AccountIcon

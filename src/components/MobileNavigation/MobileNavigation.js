@@ -11,6 +11,7 @@ const MobileNavigation = React.memo((props) => {
         className="mobile-navigation__link"
         activeClassName="mobile-navigation__link_active"
         to="/"
+        onClick={props.onModalClose}
       >
         Главная
       </NavLink>
@@ -18,6 +19,7 @@ const MobileNavigation = React.memo((props) => {
         className="mobile-navigation__link"
         activeClassName="mobile-navigation__link_active"
         to="/movies"
+        onClick={props.onModalClose}
       >
         Фильмы
       </NavLink>
@@ -25,6 +27,7 @@ const MobileNavigation = React.memo((props) => {
         className="mobile-navigation__link"
         activeClassName="mobile-navigation__link_active"
         to="/saved-movies"
+        onClick={props.onModalClose}
       >
         Сохранённые фильмы
       </NavLink>

@@ -79,10 +79,14 @@ function App() {
         >
           <Modal.Header />
           <Modal.Body>
-            <MobileNavigation />
+            <MobileNavigation
+              onModalClose={setCloseMenu}
+            />
           </Modal.Body>
           <Modal.Footer>
-            <MobileAccountLink />
+            <MobileAccountLink
+              onModalClose={setCloseMenu}
+            />
           </Modal.Footer>
         </Modal>
       )}
