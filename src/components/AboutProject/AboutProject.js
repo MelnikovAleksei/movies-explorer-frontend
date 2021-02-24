@@ -4,6 +4,8 @@ import Title from '../Title/Title';
 
 import ArticleAbout from '../ArticleAbout/ArticleAbout';
 
+import Chart from '../Chart/Chart';
+
 function AboutProject() {
   const ABOUT_PROJECT_TITLE = 'О проекте';
 
@@ -44,7 +46,7 @@ function AboutProject() {
       >
         {articlesAboutMarkup}
       </section>
-
+      <Chart />
     </article>
   )
 }

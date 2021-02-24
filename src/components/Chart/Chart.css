@@ -1,0 +1,9 @@
+.chart {
+  background: #FF6838;
+  height: 30px;
+  display: flex;
+}
+
+.chart__item {
+  height: 30px;
+}
