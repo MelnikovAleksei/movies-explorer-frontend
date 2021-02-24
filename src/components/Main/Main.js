@@ -4,6 +4,8 @@ import Promo from '../Promo/Promo';
 
 import NavTab from '../NavTab/NavTab';
 
+import AboutProject from '../AboutProject/AboutProject';
+
 function Main() {
   return (
     <main
@@ -12,6 +14,7 @@ function Main() {
       <Promo>
         <NavTab />
       </Promo>
+      <AboutProject />
     </main>
   )
 }
