@@ -29,7 +29,7 @@ function Chart(props) {
         style={itemStyle}
       >
         <div
-          className="chart__item-container"
+          className="chart__text-container"
           style={itemContainerStyle}
         >
           <p

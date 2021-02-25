@@ -10,7 +10,7 @@
   flex-direction: column;
 }
 
-.chart__item-container {
+.chart__text-container {
   height: 36px;
   display: flex;
   flex-direction: column;
