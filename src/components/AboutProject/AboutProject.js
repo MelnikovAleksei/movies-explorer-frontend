@@ -52,6 +52,7 @@ function AboutProject() {
   return (
     <article
       className="about-project-article"
+      id="about-project"
     >
       <header
         className="about-project-article__header"
