@@ -2,6 +2,7 @@
   background: #FFFFFF;
   height: 36px;
   display: flex;
+  padding-bottom: 50px;
 }
 
 .chart__item-container {
