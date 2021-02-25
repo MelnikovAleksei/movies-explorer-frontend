@@ -40,10 +40,6 @@
 }
 
 @media screen and (max-width: 767px) {
-  .chart {
-    min-height: 35px;
-  }
-
   .chart__text {
     margin: 11px 0;
     font-size: 11px;
