@@ -1,37 +1,16 @@
 import React from 'react';
 
-function Chart() {
-
-  const TOTAL_UNITS_OF_TIME_SPENT = 5;
-
-  const CHART_DATA = [ //total percentageOfTime=100 totalCountOfWeeks=5
-    {
-      id: 1,
-      numOfUnitsOfTimeSpent: 1,
-      timeUnitText: 'неделя',
-      subText: 'Back-end',
-      color: '#2BE080',
-    },
-    {
-      id: 2,
-      numOfUnitsOfTimeSpent: 4,
-      timeUnitText: 'недели',
-      subText: 'Front-end',
-      color: '#F2F2F2',
-    },
-  ];
-
+function Chart(props) {
   const getPercentage = (partialValue, totalValue) => {
     return (100 * partialValue) / totalValue;
   };
 
-  const chartItemsMarkup = CHART_DATA.map((item) => {
-
+  const chartItemsMarkup = props.data.map((item) => {
     if (item.numOfUnitsOfTimeSpent === 0) {
       return;
     }
 
-    const percentageOfTimeSpent = getPercentage(item.numOfUnitsOfTimeSpent, TOTAL_UNITS_OF_TIME_SPENT);
+    const percentageOfTimeSpent = getPercentage(item.numOfUnitsOfTimeSpent, props.totalUnitsOfTimeSpent);
 
     const amountOfTimeSpentText = `${item.numOfUnitsOfTimeSpent} ${item.timeUnitText}`;
 

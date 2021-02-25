@@ -22,6 +22,25 @@ function AboutProject() {
     },
   ];
 
+  const TOTAL_UNITS_OF_TIME_SPENT = 5;
+
+  const CHART_DATA = [
+    {
+      id: 1,
+      numOfUnitsOfTimeSpent: 1,
+      timeUnitText: 'неделя',
+      subText: 'Back-end',
+      color: '#2BE080',
+    },
+    {
+      id: 2,
+      numOfUnitsOfTimeSpent: 4,
+      timeUnitText: 'недели',
+      subText: 'Front-end',
+      color: '#F2F2F2',
+    },
+  ];
+
   const articlesAboutMarkup = ABOUT_PROJECT_ARTICLES_DATA.map((item) => (
     <ArticleAbout
       key={item.id}
@@ -46,7 +65,10 @@ function AboutProject() {
       >
         {articlesAboutMarkup}
       </section>
-      <Chart />
+      <Chart
+        data={CHART_DATA}
+        totalUnitsOfTimeSpent={TOTAL_UNITS_OF_TIME_SPENT}
+      />
     </article>
   )
 }
