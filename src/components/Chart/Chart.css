@@ -1,8 +1,13 @@
 .chart {
   background: #FFFFFF;
-  height: 36px;
   display: flex;
-  padding-bottom: 50px;
+}
+
+.chart__item {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .chart__item-container {
@@ -20,17 +25,18 @@
   font-size: 14px;
   line-height: 1.21;
   color: #000000;
+  align-self: center;
 }
 
-.chart__text:last-of-type {
-  margin: 0;
-  position: relative;
-  top: 23px;
-  left: 0;
-}
-
-.chart__text_color_light {
+.chart__sub-text {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.21;
   color: #A0A0A0;
+  margin: 14px 0 0 0;
+  align-self: center;
 }
 
 @media screen and (max-width: 767px) {
@@ -44,7 +50,7 @@
     line-height: 1.18;
   }
 
-  .chart__text:last-of-type {
-    top: 21px;
+  .chart__sub-text {
+    margin-top: 10px;
   }
 }

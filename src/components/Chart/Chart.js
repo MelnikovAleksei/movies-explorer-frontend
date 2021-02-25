@@ -36,28 +36,31 @@ function Chart() {
     const amountOfTimeSpentText = `${item.numOfUnitsOfTimeSpent} ${item.timeUnitText}`;
 
     const itemContainerStyle = {
-      width: `${percentageOfTimeSpent}%`,
       background: item.color,
+    };
+
+    const itemStyle = {
+      width: `${percentageOfTimeSpent}%`,
     };
 
     return (
       <div
         key={item.id}
-        className="chart__item-container"
-        style={itemContainerStyle}
+        className="chart__item"
+        style={itemStyle}
       >
         <div
-          className="chart__item"
+          className="chart__item-container"
+          style={itemContainerStyle}
         >
-
+          <p
+            className="chart__text"
+          >
+            {amountOfTimeSpentText}
+          </p>
         </div>
         <p
-          className="chart__text"
-        >
-          {amountOfTimeSpentText}
-        </p>
-        <p
-          className="chart__text chart__text_color_light"
+          className="chart__sub-text"
         >
           {item.subText}
         </p>
