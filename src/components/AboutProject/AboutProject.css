@@ -1,7 +1,7 @@
 .about-project-article {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 110px 30px 140px 30px;
+  padding: 110px 30px;
   box-sizing: border-box;
 }
 
@@ -17,7 +17,8 @@
 
 @media screen and (max-width: 1023px) {
   .about-project-article {
-    padding: 90px 30px 120px 30px;
+    padding-top: 90px;
+    padding-bottom: 90px;
   }
 
   .about-page-arcticle__items-section {
@@ -28,7 +29,7 @@
 
 @media screen and (max-width: 767px) {
   .about-project-article {
-    padding: 70px 4px 93px 4px;
+    padding: 70px 4px;
   }
 
   .about-page-arcticle__items-section {
