@@ -5,12 +5,6 @@
   box-sizing: border-box;
 }
 
-.about-project-article__header {
-  width: 100%;
-  padding-bottom: 23px;
-  border-bottom: 1px solid #000000;
-}
-
 .about-page-arcticle__items-section {
   display: grid;
   gap: 40px;
@@ -35,10 +29,6 @@
 @media screen and (max-width: 767px) {
   .about-project-article {
     padding: 70px 4px 93px 4px;
-  }
-
-  .about-project-article__header {
-    padding-bottom: 28px;
   }
 
   .about-page-arcticle__items-section {
