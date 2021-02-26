@@ -1,0 +1,35 @@
+.article-tech {
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
+}
+
+.article-tech__title {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 50px;
+  line-height: 1.16;
+  color: #000000;
+  letter-spacing: -0.04em;
+  text-align: center;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 14px 0;
+  max-width: 600px;
+}
+
+.article-tech__text {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.43;
+  color: #000000;
+  letter-spacing: -0.04em;
+  text-align: center;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 14px 0;
+  max-width: 460px;
+}

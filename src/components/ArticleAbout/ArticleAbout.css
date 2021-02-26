@@ -12,6 +12,8 @@
   line-height: 1.2;
   color: #000000;
   letter-spacing: -0.04em;
+  box-sizing: border-box;
+  max-width: 550px;
 }
 
 .article-about__text {

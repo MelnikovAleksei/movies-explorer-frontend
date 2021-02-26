@@ -1,13 +1,12 @@
 import React from 'react';
-
 import Article from '../Article/Article';
 
-function ArticleAbout(props) {
+function ArticleTech(props) {
 
   const STYLE_SETTINGS = {
-    article: 'article-about',
-    title: 'article-about__title',
-    text: 'article-about__text',
+    article: 'article-tech',
+    title: 'article-tech__title',
+    text: 'article-tech__text',
   };
 
   return (
@@ -19,4 +18,4 @@ function ArticleAbout(props) {
   )
 }
 
-export default ArticleAbout;
+export default ArticleTech;

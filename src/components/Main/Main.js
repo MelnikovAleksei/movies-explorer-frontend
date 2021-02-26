@@ -6,6 +6,8 @@ import NavTab from '../NavTab/NavTab';
 
 import AboutProject from '../AboutProject/AboutProject';
 
+import Techs from '../Techs/Techs';
+
 function Main() {
   return (
     <main
@@ -15,6 +17,7 @@ function Main() {
         <NavTab />
       </Promo>
       <AboutProject />
+      <Techs />
     </main>
   )
 }
