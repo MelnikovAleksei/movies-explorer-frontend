@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 import Header from '../Header/Header';
 
@@ -12,7 +12,6 @@ import MobileAccountLink from '../MobileAccountLink/MobileAccountLink';
 import Main from '../Main/Main';
 
 function App() {
-
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   const [menuIsOpen, setMenuIsOpen] = React.useState(false);
@@ -33,14 +32,21 @@ function App() {
     setMenuIsOpen(false);
   };
 
+  const exclusionRoutesPathsArray = [
+    '/signin',
+    '/signup',
+  ];
+
   return (
     <div className="app">
-      <Header
-        loggedIn={loggedIn}
-        onSignup={handleSignup}
-        onSignin={handleSignin}
-        onOpenMenu={setOpenMenu}
-      />
+      {useRouteMatch(exclusionRoutesPathsArray) ? null : (
+        <Header
+          loggedIn={loggedIn}
+          onSignup={handleSignup}
+          onSignin={handleSignin}
+          onOpenMenu={setOpenMenu}
+        />
+      )}
       <Switch>
         <Route
           exact
