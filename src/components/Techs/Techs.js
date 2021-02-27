@@ -3,6 +3,8 @@ import ArticleTech from '../ArticleTech/ArticleTech';
 
 import Title from '../Title/Title';
 
+import TechsList from '../TechsList/TechsList';
+
 function Techs() {
 
   const TECHS_TITLE_TEXT = 'Технологии';
@@ -38,6 +40,7 @@ function Techs() {
         className="techs-article__items-section"
       >
         {articlesMarkup}
+        <TechsList />
       </section>
     </article>
   )

@@ -2,20 +2,16 @@
   max-width: 1280px;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 100px 70px;
+  padding: 100px 70px 50px 70px;
 }
 
 .techs-article__header {
   padding-bottom: 76px;
 }
 
-.techs-article__items-section {
-
-}
-
 @media screen and (max-width: 1023px) {
   .techs-article {
-    padding: 90px 50px;
+    padding: 90px 50px 45px 50px;
   }
 
   .techs-article__header {
@@ -25,7 +21,7 @@
 
 @media screen and (max-width: 767px) {
   .techs-article {
-    padding: 70px 18px;
+    padding: 70px 18px 35px 18px;
   }
 
   .techs-article__header {
