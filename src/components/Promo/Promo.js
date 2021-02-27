@@ -7,12 +7,17 @@ function Promo(props) {
     <section
       className="promo"
     >
-      <h1
-        className="promo__title"
+      <div
+        className="promo__container"
       >
-        {PROMO_TITLE_TEXT}
-      </h1>
-      {props.children}
+        <h1
+          className="promo__title"
+        >
+          {PROMO_TITLE_TEXT}
+        </h1>
+        {props.children}
+      </div>
+
     </section>
   )
 }
