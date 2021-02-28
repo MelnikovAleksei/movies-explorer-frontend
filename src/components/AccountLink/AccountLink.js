@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { ReactComponent as AccountIcon } from '../../images/AccountLink/account-link-icon.svg'
 
-
 const AccountLink = React.memo((props) => {
 
   const ACCOUNT_LINKS = [

@@ -40,24 +40,31 @@ const MobileNavigation = React.memo((props) => {
   ];
 
   const mobileNavigationLinksMarkup = MOBILE_NAVIGATION_LINKS.map((item) => (
-    <NavLink
+    <li
       key={item.id}
-      className={item.classname}
-      activeClassName={item.activeClassName}
-      to={item.link}
-      onClick={item.onClick}
-      exact={item.exact}
+      className="mobile-navigation__nav-list-item"
     >
-      {item.title}
-    </NavLink>
+      <NavLink
+        className={item.classname}
+        activeClassName={item.activeClassName}
+        to={item.link}
+        onClick={item.onClick}
+        exact={item.exact}
+      >
+        {item.title}
+      </NavLink>
+    </li>
   ));
 
   return (
     <nav
       className="mobile-navigation"
     >
-      {mobileNavigationLinksMarkup}
-      {props.children}
+      <ul
+        className="mobile-navigation__nav-list"
+      >
+        {mobileNavigationLinksMarkup}
+      </ul>
     </nav>
   )
 })

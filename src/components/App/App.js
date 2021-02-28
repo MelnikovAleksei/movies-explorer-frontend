@@ -7,7 +7,7 @@ import Modal from '../Modal/Modal';
 
 import MobileNavigation from '../MobileNavigation/MobileNavigation';
 
-import MobileAccountLink from '../MobileAccountLink/MobileAccountLink';
+import MobileAccountNavList from '../MobileAccountNavList/MobileAccountNavList';
 
 import Main from '../Main/Main';
 
@@ -92,7 +92,7 @@ function App() {
             />
           </Modal.Body>
           <Modal.Footer>
-            <MobileAccountLink
+            <MobileAccountNavList
               onModalClose={setCloseMenu}
             />
           </Modal.Footer>

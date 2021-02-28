@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import AccountLink from '../AccountLink/AccountLink';
+
 const Navigation = React.memo(() => {
 
   const NAVIGATION_LINKS = [
@@ -22,23 +24,40 @@ const Navigation = React.memo(() => {
     },
   ];
 
-  const naigationLinksMarkup = NAVIGATION_LINKS.map((item) => (
-    <NavLink
+  const navigationLinksMarkup = NAVIGATION_LINKS.map((item) => (
+    <li
       key={item.id}
-      className={item.classname}
-      activeClassName={item.activeClassName}
-      to={item.link}
-      exact={item.exact}
+      className="navigation__nav-list-item"
     >
-      {item.title}
-    </NavLink>
+      <NavLink
+        className={item.classname}
+        activeClassName={item.activeClassName}
+        to={item.link}
+        exact={item.exact}
+      >
+        {item.title}
+      </NavLink>
+    </li>
   ));
 
   return (
     <nav
       className="navigation"
     >
-      {naigationLinksMarkup}
+      <ul
+        className="navigation__nav-list"
+      >
+        <div
+          className="navigation__nav-links-container"
+        >
+          {navigationLinksMarkup}
+        </div>
+        <li
+          className="navigation__nav-list-item"
+        >
+          <AccountLink />
+        </li>
+      </ul>
     </nav>
   )
 })

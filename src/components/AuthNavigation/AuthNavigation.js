@@ -25,21 +25,30 @@ const AuthNavigation = React.memo((props) => {
   ];
 
   const authNavigationLinksMarkup = AUTH_NAVIGATION_LINKS.map((item) => (
-    <NavLink
+    <li
       key={item.id}
-      className={item.className}
-      to={item.link}
-      onClick={item.onClick}
+      className="auth-navigation__nav-list-item"
     >
-      {item.title}
-    </NavLink>
+      <NavLink
+        className={item.className}
+        to={item.link}
+        onClick={item.onClick}
+      >
+        {item.title}
+      </NavLink>
+    </li>
+
   ));
 
   return (
     <nav
       className="auth-navigation"
     >
-      {authNavigationLinksMarkup}
+      <ul
+        className="auth-navigation__nav-list"
+      >
+        {authNavigationLinksMarkup}
+      </ul>
     </nav>
   )
 });

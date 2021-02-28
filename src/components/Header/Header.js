@@ -4,7 +4,7 @@ import AuthNavigation from '../AuthNavigation/AuthNavigation';
 
 import Navigation from '../Navigation/Navigation';
 
-import AccountLink from '../AccountLink/AccountLink';
+
 
 import LogoLink from '../LogoLink/LogoLink';
 
@@ -16,9 +16,6 @@ function Header(props) {
       className="header"
     >
       <LogoLink />
-      <div
-        className="header__navigation-container"
-      >
         {props.loggedIn ? (
             <Navigation />
         )
@@ -28,10 +25,6 @@ function Header(props) {
               onSignin={props.onSignin}
             />
         )}
-        {props.loggedIn && (
-            <AccountLink />
-        )}
-      </div>
       {props.loggedIn && (
           <MenuButton
             onOpenMenu={props.onOpenMenu}

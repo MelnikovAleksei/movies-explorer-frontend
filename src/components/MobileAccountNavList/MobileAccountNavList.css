@@ -1,9 +1,15 @@
-.mobile-account-link {
+.mobile-account-nav__link {
   display: none;
 }
 
 @media screen and (max-width: 1023px) {
-  .mobile-account-link {
+  .mobile-account-nav__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mobile-account-nav__link {
     font-family: 'Inter', Arial, sans-serif;
     font-weight: normal;
     font-style: normal;
@@ -16,7 +22,7 @@
     margin: 0 auto;
   }
 
-  .mobile-account-link__icon {
+  .mobile-account-nav__link-icon {
     padding: 8px 7px;
     background: #F9F9F9;
     border-radius: 4px;

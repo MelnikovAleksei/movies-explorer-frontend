@@ -6,7 +6,7 @@
   line-height: 1.14;
   color: #000000;
   text-decoration: none;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   opacity: 1;
   transition: opacity .3s ease;

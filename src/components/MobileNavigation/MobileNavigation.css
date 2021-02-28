@@ -9,6 +9,29 @@
     align-items: center;
   }
 
+  .mobile-navigation__nav-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mobile-navigation__nav-links-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mobile-navigation__nav-list-item {
+    padding-bottom: 22px;
+  }
+
+  .mobile-navigation__nav-list-item:last-of-type {
+    padding-bottom: 0;
+  }
+
   .mobile-navigation__link {
     font-family: 'Inter', Arial, sans-serif;
     font-weight: normal;

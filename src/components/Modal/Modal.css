@@ -48,7 +48,8 @@
   }
 
   .modal__footer {
-    display: flex;
+    align-self: center;
+    flex: 0;
   }
 
   .modal__close-button {
