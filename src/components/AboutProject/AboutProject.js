@@ -1,5 +1,7 @@
 import React from 'react';
 
+import MainArticle from '../MainArticle/MainArticle';
+
 import Title from '../Title/Title';
 
 import ArticleAbout from '../ArticleAbout/ArticleAbout';
@@ -49,28 +51,41 @@ function AboutProject() {
     />
   ));
 
+  const ABOUT_PROJECT_ARTICLE_STYLES = {
+    article: 'about-project-article',
+    articleHeader: 'about-project-article__header',
+    articleItemsSection: 'about-page-arcticle__items-section',
+    articleSection: 'about-page-arcticle__section',
+  };
+
+  const TECHS_ARTICLE_ID = 'about-project';
+
   return (
-    <article
-      className="about-project-article"
-      id="about-project"
+    <MainArticle
+      id={TECHS_ARTICLE_ID}
+      className={ABOUT_PROJECT_ARTICLE_STYLES.article}
     >
-      <header
-        className="about-project-article__header"
+      <MainArticle.Header
+        className={ABOUT_PROJECT_ARTICLE_STYLES.articleHeader}
       >
         <Title
           title={ABOUT_PROJECT_TITLE}
         />
-      </header>
-      <section
-        className="about-page-arcticle__items-section"
+      </MainArticle.Header>
+      <MainArticle.ArticlesSection
+        className={ABOUT_PROJECT_ARTICLE_STYLES.articleItemsSection}
       >
         {articlesAboutMarkup}
-      </section>
-      <Chart
-        data={CHART_DATA}
-        totalUnitsOfTimeSpent={TOTAL_UNITS_OF_TIME_SPENT}
-      />
-    </article>
+      </MainArticle.ArticlesSection>
+      <MainArticle.Section
+        className={ABOUT_PROJECT_ARTICLE_STYLES.articleSection}
+      >
+        <Chart
+          data={CHART_DATA}
+          totalUnitsOfTimeSpent={TOTAL_UNITS_OF_TIME_SPENT}
+        />
+      </MainArticle.Section>
+    </MainArticle>
   )
 }
 

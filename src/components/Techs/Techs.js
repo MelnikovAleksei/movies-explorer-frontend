@@ -1,4 +1,7 @@
 import React from 'react';
+
+import MainArticle from '../MainArticle/MainArticle';
+
 import ArticleTech from '../ArticleTech/ArticleTech';
 
 import Title from '../Title/Title';
@@ -25,24 +28,38 @@ function Techs() {
     />
   ));
 
+  const TECHS_ARTICLE_STYLES = {
+    article: 'techs-article',
+    articleHeader: 'techs-article__header',
+    articleItemsSection: 'techs-article__items-section',
+    articleSection: 'techs-article__section',
+  };
+
+  const TECHS_ARTICLE_ID = 'technologies';
+
   return (
-    <article
-      className="techs-article"
+    <MainArticle
+      id={TECHS_ARTICLE_ID}
+      className={TECHS_ARTICLE_STYLES.article}
     >
-      <header
-        className="techs-article__header"
+      <MainArticle.Header
+        className={TECHS_ARTICLE_STYLES.articleHeader}
       >
         <Title
           title={TECHS_TITLE_TEXT}
         />
-      </header>
-      <section
-        className="techs-article__items-section"
+      </MainArticle.Header>
+      <MainArticle.ArticlesSection
+        className={TECHS_ARTICLE_STYLES.articleItemsSection}
       >
         {articlesMarkup}
+      </MainArticle.ArticlesSection>
+      <MainArticle.Section
+        className={TECHS_ARTICLE_STYLES.articleSection}
+      >
         <TechsList />
-      </section>
-    </article>
+      </MainArticle.Section>
+    </MainArticle>
   )
 }
 
