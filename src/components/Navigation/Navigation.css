@@ -1,6 +1,7 @@
 .navigation {
   box-sizing: border-box;
-  padding: 10px 50px;
+  padding: 5px 50px;
+
 }
 
 .navigation__link {
@@ -11,7 +12,7 @@
   line-height: 1.29;
   color: #000000;
   text-decoration: none;
-  margin: 0 10px;
+  margin: 0 20px 0 0;
   align-self: center;
   opacity: 1;
   transition: opacity .3s ease;
@@ -23,10 +24,6 @@
 
 .navigation__link:hover {
   opacity: .7;
-}
-
-.navigation__link:first-of-type {
-  margin-left: 0;
 }
 
 .navigation__link:last-of-type {
