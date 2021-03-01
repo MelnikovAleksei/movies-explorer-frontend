@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ListLinks({ items, styleSettings }) {
+function ListLinks({ items, listTitle, styleSettings }) {
   const listLinksItemsMarkup = items.map((item) => (
     <li
       key={item.id}
@@ -22,11 +22,21 @@ function ListLinks({ items, styleSettings }) {
   ));
 
   return (
-    <ul
-      className={styleSettings.list}
-    >
-      {listLinksItemsMarkup}
-    </ul>
+    <>
+      {listTitle && (
+        <h5
+          className={styleSettings.listTitle}
+        >
+          {listTitle}
+        </h5>
+      )}
+      <ul
+        className={styleSettings.list}
+      >
+        {listLinksItemsMarkup}
+      </ul>
+    </>
+
   )
 }
 

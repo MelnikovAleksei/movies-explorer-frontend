@@ -20,6 +20,7 @@ function AboutMe() {
       title: 'Алексей',
       subTitle: 'Фронтенд-разработчик, 27 лет',
       text: 'Я работаю и живу в Москве. Люблю кино, документальную фотографию, путешествия и кулинарию. Во время своей учебы я реализовал 15 проектных работ на Reactjs, Nodejs (Expressjs), JavaScript, CSS, HTML. По каждой работе было проведено код-ревью командой Практикума. В работе для меня важно учиться новому и помогать в этом своим коллегам.',
+      linksTitle: 'Портфолио',
       links: [
         {
           id: 1,
@@ -57,6 +58,7 @@ function AboutMe() {
       title={item.title}
       subTitle={item.subTitle}
       text={item.text}
+      linksTitle={item.linksTitle}
       links={item.links}
       images={item.images}
     />
