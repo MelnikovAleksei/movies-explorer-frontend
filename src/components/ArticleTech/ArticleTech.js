@@ -5,6 +5,7 @@ function ArticleTech(props) {
 
   const STYLE_SETTINGS = {
     article: 'article-tech',
+    articleTextContainer: 'article-tech__text-container',
     title: 'article-tech__title',
     text: 'article-tech__text',
   };
