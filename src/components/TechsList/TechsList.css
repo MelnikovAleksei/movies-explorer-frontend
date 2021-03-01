@@ -27,7 +27,6 @@
 
 @media screen and (max-width: 1023px) {
   .techs-list {
-    grid-template-columns: repeat(7, 84px);
     padding: 69px 0 45px 0;
   }
 
@@ -40,6 +39,7 @@
 
 @media screen and (max-width: 767px) {
   .techs-list {
+    grid-auto-flow: unset;
     grid-template-columns: repeat(2, 84px);
     padding: 36px 0 35px 0;
   }
