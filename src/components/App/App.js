@@ -11,6 +11,8 @@ import MobileAccountNavList from '../MobileAccountNavList/MobileAccountNavList';
 
 import Main from '../Main/Main';
 
+import Footer from '../Footer/Footer';
+
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
 
@@ -80,6 +82,9 @@ function App() {
           <h1>/signin</h1>
         </Route>
       </Switch>
+      {useRouteMatch(exclusionRoutesPathsArray) ? null : (
+        <Footer />
+      )}
       {menuIsOpen && (
         <Modal
           modalIsOpen={menuIsOpen}
