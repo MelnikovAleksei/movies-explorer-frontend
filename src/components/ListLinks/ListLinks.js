@@ -8,7 +8,7 @@ function ListLinks({ items, listTitle, styleSettings }) {
     >
       <a
         className={styleSettings.listLink}
-        src={item.src}
+        href={item.href}
         target='_blank'
       >
         {item.text}
