@@ -3,7 +3,7 @@
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 70px 70px 48px 70px;
+  padding: 55px 70px 48px 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,7 +13,7 @@
 .search-form__icon {
   position: absolute;
   left: 70px;
-  top: 82px;
+  top: 67px;
   padding: 6px;
   width: 34px;
   height: 34px;
@@ -37,7 +37,7 @@
 .search-form__submit-button {
   position: absolute;
   right: 70px;
-  top: 87px;
+  top: 72px;
   text-align: center;
   font-family: 'Inter', Arial, sans-serif;
   font-weight: 500;
@@ -50,6 +50,11 @@
   border-radius: 48px;
   padding: 8px 10px;
   box-sizing: border-box;
+  cursor: pointer;
+}
+
+.search-form__submit-button:disabled {
+  cursor: not-allowed;
 }
 
 .search-form__checkbox-label {
@@ -119,23 +124,23 @@
 
 @media screen and (max-width: 1023px) {
   .search-form {
-    padding: 86px 30px 61px 30px;
+    padding: 70px 30px 61px 30px;
   }
 
   .search-form__icon {
     left: 30px;
-    top: 97px;
+    top: 82px;
   }
 
   .search-form__submit-button {
     right: 30px;
-    top: 103px;
+    top: 88px;
   }
 }
 
 @media screen and (max-width: 767px) {
   .search-form {
-    padding: 98px 14px 50px 14px;
+    padding: 83px 14px 50px 14px;
   }
 
   .search-form__icon {
@@ -161,6 +166,6 @@
 
   .search-form__submit-button {
     right: 14px;
-    top: 116px;
+    top: 100px;
   }
 }
