@@ -12,11 +12,14 @@ function ListLinks({ items, listTitle, styleSettings }) {
         target='_blank'
       >
         {item.text}
-        <span
-          className={styleSettings.listLinkSpan}
-        >
-          &#8599;
-        </span>
+        {item.iconSpan && (
+          <span
+            className={styleSettings.listLinkSpan}
+          >
+            {item.iconSpan}
+          </span>
+        )}
+
       </a>
     </li>
   ));
