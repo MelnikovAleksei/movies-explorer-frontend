@@ -31,6 +31,12 @@
   line-height: 1.33;
   color: #000000;
   text-decoration: none;
+  opacity: 1;
+  transition: opacity .3s ease;
+}
+
+.navigation-tab__list-link:hover {
+  opacity: .7;
 }
 
 @media screen and (max-width: 767px) {

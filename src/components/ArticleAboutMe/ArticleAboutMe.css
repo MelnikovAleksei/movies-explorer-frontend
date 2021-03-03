@@ -73,6 +73,12 @@
   line-height: 1.21;
   color: #000000;
   text-decoration: none;
+  opacity: 1;
+  transition: opacity .3s ease;
+}
+
+.article-about-me__list-link:hover {
+  opacity: .7;
 }
 
 
