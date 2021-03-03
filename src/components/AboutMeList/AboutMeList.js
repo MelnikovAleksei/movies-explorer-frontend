@@ -11,16 +11,19 @@ function AboutMeList() {
       id: 1,
       text: 'Статичный сайт',
       href: 'https://github.com/MelnikovAleksei/how-to-learn',
+      iconSpan: '↗',
     },
     {
       id: 2,
       text: 'Адаптивный сайт',
       href: 'https://github.com/MelnikovAleksei/russian-travel',
+      iconSpan: '↗',
     },
     {
       id: 3,
       text: 'Одностраничное приложение',
       href: 'https://github.com/MelnikovAleksei/mesto-react-express',
+      iconSpan: '↗',
     },
   ];
 
