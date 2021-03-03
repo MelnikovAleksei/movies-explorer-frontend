@@ -48,6 +48,8 @@
 
 @import url(./components/AboutMeList/AboutMeList.css);
 
+@import url(./components/SearchForm/SearchForm.css);
+
 @import url(./components/Footer/Footer.css);
 
 @import url(./components/FooterList/FooterList.css);

@@ -11,6 +11,8 @@ import MobileAccountNavList from '../MobileAccountNavList/MobileAccountNavList';
 
 import Main from '../Main/Main';
 
+import Movies from '../Movies/Movies';
+
 import Footer from '../Footer/Footer';
 
 function App() {
@@ -59,7 +61,7 @@ function App() {
         <Route
           path="/movies"
         >
-          <h1>/movies</h1>
+          <Movies />
         </Route>
         <Route
           path="/saved-movies"
