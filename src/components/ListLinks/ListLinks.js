@@ -22,7 +22,9 @@ function ListLinks({ items, listTitle, styleSettings }) {
   ));
 
   return (
-    <>
+    <div
+      className={styleSettings.list}
+    >
       {listTitle && (
         <h5
           className={styleSettings.listTitle}
@@ -31,11 +33,11 @@ function ListLinks({ items, listTitle, styleSettings }) {
         </h5>
       )}
       <ul
-        className={styleSettings.list}
+        className={styleSettings.listList}
       >
         {listLinksItemsMarkup}
       </ul>
-    </>
+    </div>
 
   )
 }

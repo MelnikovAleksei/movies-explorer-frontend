@@ -26,6 +26,7 @@ function AboutMeList() {
 
   const ABOUT_ME_LIST_STYLE_SETTINGS = {
     list: 'about-me-list',
+    listList: 'about-me-list__list',
     listTitle: 'about-me-list__title',
     listItem: 'about-me-list__item',
     listLink: 'about-me-list__link',
