@@ -71,10 +71,11 @@
   position: relative;
   width: 174px;
   height: 20px;
+  cursor: pointer;
 }
 
 .search-form__checkbox-label_focus {
-  outline: 1px solid #000000;
+  outline: 2px solid #000000;
 }
 
 .search-form__checkbox-input {
@@ -85,7 +86,6 @@
 
 .search-form__checkbox-slider {
   position: absolute;
-  cursor: pointer;
   top: 0;
   left: 0px;
   right: 140px;
