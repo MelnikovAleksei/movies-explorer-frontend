@@ -2,11 +2,11 @@ import React from 'react';
 
 import { useLocation } from 'react-router-dom';
 
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-
 import SearchForm from '../SearchForm/SearchForm';
 
-function Movies() {
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+
+function SavedMovies() {
 
   let location = useLocation();
 
@@ -20,4 +20,4 @@ function Movies() {
   )
 }
 
-export default Movies;
+export default SavedMovies;
