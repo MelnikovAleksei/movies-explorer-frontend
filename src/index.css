@@ -54,6 +54,8 @@
 
 @import url(./components/MoviesCard/MoviesCard.css);
 
+@import url(./components/ShowMoreButton/ShowMoreButton.css);
+
 @import url(./components/Footer/Footer.css);
 
 @import url(./components/FooterList/FooterList.css);

@@ -1,0 +1,42 @@
+.show-more {
+  max-width: 1280px;
+  box-sizing: border-box;
+  padding: 50px 70px 80px 70px;
+  margin: 0 auto;
+}
+
+.show-more__button {
+  width: 100%;
+  min-height: 36px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 1.25;
+  color: #000000;
+  text-align: center;
+  background: #F9F9F9;
+  border-radius: 6px;
+  border: unset;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity .3s ease;
+}
+
+.show-more__button:hover {
+  opacity: .7;
+}
+
+@media screen and (max-width: 1023px) {
+  .show-more {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .show-more {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
