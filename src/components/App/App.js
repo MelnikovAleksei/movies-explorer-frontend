@@ -15,6 +15,10 @@ import Movies from '../Movies/Movies';
 
 import SavedMovies from '../SavedMovies/SavedMovies';
 
+import Register from '../Register/Register';
+
+import Login from '../Login/Login';
+
 import Footer from '../Footer/Footer';
 
 function App() {
@@ -78,12 +82,12 @@ function App() {
         <Route
           path="/signup"
         >
-          <h1>/signup</h1>
+          <Register />
         </Route>
         <Route
           path="/signin"
         >
-          <h1>/signin</h1>
+          <Login />
         </Route>
       </Switch>
       {useRouteMatch(exclusionRoutesPathsArray) ? null : (

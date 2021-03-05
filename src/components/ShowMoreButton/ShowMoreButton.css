@@ -15,16 +15,15 @@
   line-height: 1.25;
   color: #000000;
   text-align: center;
-  background: #F9F9F9;
+  background: rgba(249, 249, 249, 1);
   border-radius: 6px;
   border: unset;
   cursor: pointer;
-  opacity: 1;
-  transition: opacity .3s ease;
+  transition: background 3s ease;
 }
 
 .show-more__button:hover {
-  opacity: .7;
+  background: rgba(249, 249, 249, .8);
 }
 
 @media screen and (max-width: 1023px) {

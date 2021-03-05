@@ -9,7 +9,7 @@ function InputField(props) {
       aria-label={props.settings.ariaLabel}
       placeholder={props.settings.placeholder}
       name={props.settings.name}
-      required={props.required}
+      required={props.settings.required}
       minLength={props.settings.minLength}
       maxLength={props.settings.maxLength}
       onChange={props.onChange}
