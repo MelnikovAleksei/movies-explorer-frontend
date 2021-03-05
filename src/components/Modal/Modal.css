@@ -40,16 +40,16 @@
   .modal__header {
     display: flex;
     justify-content: flex-end;
-    flex: 1;
+    flex: 1 130px;
   }
 
   .modal__main {
-    flex: 2;
+    flex: 2 750px;
   }
 
   .modal__footer {
     align-self: center;
-    flex: 0;
+    flex: 1 110px;
   }
 
   .modal__close-button {
