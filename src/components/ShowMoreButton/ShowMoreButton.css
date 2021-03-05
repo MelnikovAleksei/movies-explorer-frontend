@@ -19,7 +19,7 @@
   border-radius: 6px;
   border: unset;
   cursor: pointer;
-  transition: background 3s ease;
+  transition: background .3s ease;
 }
 
 .show-more__button:hover {
