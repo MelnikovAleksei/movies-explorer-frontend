@@ -3,9 +3,14 @@ import React from 'react';
 function FormTitle({
   titleText,
 }) {
+
+  const FORM_TITLE_STYLES = {
+    title: 'form-title',
+  };
+
   return (
     <h1
-      className="form-title"
+      className={FORM_TITLE_STYLES.title}
     >
       {titleText}
     </h1>

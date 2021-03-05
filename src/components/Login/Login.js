@@ -1,8 +1,6 @@
 import React from 'react';
 
-import LogoLink from '../LogoLink/LogoLink';
-
-import FormTitle from '../FormTitle/FormTitle';
+import AuthHeader from '../AuthHeader/AuthHeader';
 
 import AuthForm from '../AuthForm/AuthForm';
 
@@ -55,44 +53,41 @@ function Login() {
     title: 'Войти',
   };
 
-  const REGISTER_FORM_STYLE_SETTINGS = {
-    form: '',
-    inputContainer: '',
-    input: '',
-    label: '',
-    errorText: '',
-    submitButton: '',
-    signInLink: '',
+  const FORM_AUTH_QUESTION_SETTINGS = {
+    questionText: 'Ещё не зарегистрированы? ',
   };
 
-  const FORM_AUTH_QUESTION_SETTINGS = {
-    questionText: 'Ещё не зарегистрированы?',
+  const ROUTE_LINK_SETTINGS = {
     linkTitle: 'Регистрация',
     linkPath: '/signup',
-  }
+  };
 
   const TITLE_TEXT = 'Рады видеть!';
 
   const AUTH_ERROR_TEXT = 'При авторизации произошла ошибка. Токен не передан или передан не в том формате.';
 
+  const LOGIN_STYLE_SETTINGS = {
+    main: 'login',
+    header: 'register__header',
+    title: 'register__title',
+  };
+
   return (
-    <main>
-      <div>
-        <LogoLink />
-        <FormTitle
-          titleText={TITLE_TEXT}
-        />
-      </div>
+    <main
+      className={LOGIN_STYLE_SETTINGS.main}
+    >
+      <AuthHeader
+        titleText={TITLE_TEXT}
+      />
       <AuthForm
         inputsData={INPUTS_DATA}
-        formStyleSettings={REGISTER_FORM_STYLE_SETTINGS}
         onChange={handleChange}
         values={values}
         errors={errors}
         onSubmit={handleSubmit}
         submitButtonSettings={SUBMIT_BUTTON_SETTINGS}
-        submitButtonClassName={REGISTER_FORM_STYLE_SETTINGS.submitButton}
         formAuthQuestionSettings={FORM_AUTH_QUESTION_SETTINGS}
+        routeLinkSettings={ROUTE_LINK_SETTINGS}
         formIsValid={isValid}
         authErrorText={AUTH_ERROR_TEXT}
       />

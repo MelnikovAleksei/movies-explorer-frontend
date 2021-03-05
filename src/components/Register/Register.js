@@ -1,8 +1,6 @@
 import React from 'react';
 
-import LogoLink from '../LogoLink/LogoLink';
-
-import FormTitle from '../FormTitle/FormTitle';
+import AuthHeader from '../AuthHeader/AuthHeader';
 
 import AuthForm from '../AuthForm/AuthForm';
 
@@ -66,44 +64,41 @@ function Register() {
     title: 'Зарегистрироваться',
   };
 
-  const REGISTER_FORM_STYLE_SETTINGS = {
-    form: '',
-    inputContainer: '',
-    input: '',
-    label: '',
-    errorText: '',
-    submitButton: '',
-    signInLink: '',
+  const FORM_AUTH_QUESTION_SETTINGS = {
+    questionText: 'Уже зарегистрированы? ',
   };
 
-  const FORM_AUTH_QUESTION_SETTINGS = {
-    questionText: 'Уже зарегистрированы?',
+  const ROUTE_LINK_SETTINGS = {
     linkTitle: 'Войти',
     linkPath: '/signin',
-  }
+  };
+
+  const REGISTER_STYLE_SETTINGS = {
+    main: 'register',
+    header: 'register__header',
+    title: 'register__title',
+  };
 
   const TITLE_TEXT = 'Добро пожаловать!';
 
   const AUTH_ERROR_TEXT = 'При регистрации пользователя произошла ошибка.';
 
   return (
-    <main>
-      <div>
-        <LogoLink />
-        <FormTitle
-          titleText={TITLE_TEXT}
-        />
-      </div>
+    <main
+      className={REGISTER_STYLE_SETTINGS.main}
+    >
+      <AuthHeader
+        titleText={TITLE_TEXT}
+      />
       <AuthForm
         inputsData={INPUTS_DATA}
-        formStyleSettings={REGISTER_FORM_STYLE_SETTINGS}
         onChange={handleChange}
         values={values}
         errors={errors}
         onSubmit={handleSubmit}
         submitButtonSettings={SUBMIT_BUTTON_SETTINGS}
-        submitButtonClassName={REGISTER_FORM_STYLE_SETTINGS.submitButton}
         formAuthQuestionSettings={FORM_AUTH_QUESTION_SETTINGS}
+        routeLinkSettings={ROUTE_LINK_SETTINGS}
         formIsValid={isValid}
         authErrorText={AUTH_ERROR_TEXT}
       />

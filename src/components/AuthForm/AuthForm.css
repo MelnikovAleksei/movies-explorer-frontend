@@ -1,0 +1,127 @@
+.auth-form {
+  box-sizing: border-box;
+  max-width: 396px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.auth-form__input-fields-container {
+  flex: 1 266px;
+}
+
+.auth-form__input-container {
+  margin-bottom: 20px;
+}
+
+.auth-form__input-container:last-of-type {
+  margin-bottom: 10px;
+}
+
+.auth-form__input-label {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 10px;
+  line-height: 1.2;
+  color: #A0A0A0;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form__input {
+  width: 100%;
+  min-height: 46px;
+  text-align: left;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 13px;
+  line-height: 1.23;
+  color: #000000;;
+  padding: 15px;
+  margin-top: 10px;
+  border: unset;
+  box-sizing: border-box;
+  background: #F9F9F9;
+  border-radius: 8px;
+}
+
+.auth-form__input:invalid {
+  color: #EE3465;
+}
+
+.auth-form__input-error {
+  text-align: left;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 10px;
+  line-height: 1.2;
+  color: #EE3465;
+}
+
+.auth-form__button-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 1 207px;
+}
+
+.auth-form__submit-button {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.21;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 15px 0;
+  box-sizing: border-box;
+  background: rgba(255, 104, 56, 1);
+  border-radius: 3px;
+  border: unset;
+  color: rgb(255, 255, 255, 1);
+  cursor: pointer;
+  transition: background .3s ease;
+}
+
+.auth-form__submit-button:hover {
+  background: rgba(255, 104, 56, .8);
+}
+
+.auth-form__submit-button:disabled {
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 1023px) {
+  .auth-form__button-container {
+    justify-content: center;
+  }
+
+  .auth-form__button-container {
+    flex-basis: 379px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .auth-form__button-container {
+    justify-content: flex-end;
+  }
+
+  .auth-form__submit-button {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .auth-form__button-container {
+    flex-basis: 261px;
+  }
+}

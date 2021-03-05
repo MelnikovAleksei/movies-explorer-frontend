@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 function FormAuthQuestion({
   settings,
+  children,
 }) {
 
   const STYLE_SETTINGS = {
@@ -15,12 +16,7 @@ function FormAuthQuestion({
       className={STYLE_SETTINGS.text}
     >
       {settings.questionText}
-      <Link
-        className={STYLE_SETTINGS.link}
-        to={settings.linkPath}
-      >
-        {settings.linkTitle}
-      </Link>
+      {children}
     </p>
   )
 }

@@ -7,11 +7,12 @@ function AuthError({ errorText }) {
   };
 
   return (
-    <p
+    <span
       className={AUTH_ERROR_STYLES.text}
+      aria-live="polite"
     >
       {errorText}
-    </p>
+    </span>
   )
 }
 

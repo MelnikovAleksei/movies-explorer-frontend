@@ -1,11 +1,18 @@
 .form-title {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 20px 0;
   font-family: 'Inter', Arial, sans-serif;
   font-weight: 500;
   font-style: normal;
   font-size: 24px;
   line-height: 1.2;
   color: #000000;
-  margin: 0 auto;
-  padding: 0;
-  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  .form-title {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
 }
