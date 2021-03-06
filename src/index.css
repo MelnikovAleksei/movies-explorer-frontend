@@ -60,8 +60,6 @@
 
 @import url(./components/Register/Register.css);
 
-@import url(./components/AuthHeader/AuthHeader.css);
-
 @import url(./components/AuthForm/AuthForm.css);
 
 @import url(./components/AuthError/AuthError.css);
@@ -72,6 +70,18 @@
 
 @import url(./components/FormTitle/FormTitle.css);
 
+@import url(./components/Profile/Profile.css);
+
+@import url(./components/ProfileForm/ProfileForm.css);
+
+@import url(./components/ProfileEditButton/ProfileEditButton.css);
+
+@import url(./components/ProfileUpdateError/ProfileUpdateError.css);
+
+@import url(./components/ProfileSignOutButton/ProfileSignoutButton.css);
+
 @import url(./components/Footer/Footer.css);
 
 @import url(./components/FooterList/FooterList.css);
+
+@import url(./components/NotFound/NotFound.css);

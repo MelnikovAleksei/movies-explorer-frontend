@@ -4,8 +4,6 @@ import AuthNavigation from '../AuthNavigation/AuthNavigation';
 
 import Navigation from '../Navigation/Navigation';
 
-
-
 import LogoLink from '../LogoLink/LogoLink';
 
 import MenuButton from '../MenuButton/MenuButton';

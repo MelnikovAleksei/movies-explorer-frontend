@@ -1,5 +1,9 @@
 import React from 'react';
 
+import FormTitle from '../FormTitle/FormTitle';
+
+import LogoLink from '../LogoLink/LogoLink';
+
 import InputField from '../InputField/InputField';
 
 import SubmitButton from '../SubmitButton/SubmitButton';
@@ -11,6 +15,7 @@ import AuthError from '../AuthError/AuthError';
 import RouteLink from '../RouteLink/RouteLink';
 
 function AuthForm({
+  titleText,
   inputsData,
   onChange,
   values,
@@ -25,7 +30,8 @@ function AuthForm({
 
   const FORM_STYLE_SETTINGS = {
     form: 'auth-form',
-    formInputFieldsContainer: 'auth-form__input-fields-container',
+    formTitle: 'auth-form__title',
+    formInputFieldset: 'auth-form__input-fieldset',
     inputContainer: 'auth-form__input-container',
     buttonContainer: 'auth-form__button-container',
     input: 'auth-form__input',
@@ -66,13 +72,21 @@ function AuthForm({
       noValidate
     >
       <div
-        className={FORM_STYLE_SETTINGS.formInputFieldsContainer}
+        className={FORM_STYLE_SETTINGS.formTitle}
+      >
+        <LogoLink />
+        <FormTitle
+          titleText={titleText}
+        />
+      </div>
+      <fieldset
+        className={FORM_STYLE_SETTINGS.formInputFieldset}
       >
         {formInputsMarkup}
         <AuthError
           errorText={authErrorText}
         />
-      </div>
+      </fieldset>
       <div
         className={FORM_STYLE_SETTINGS.buttonContainer}
       >

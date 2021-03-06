@@ -1,0 +1,11 @@
+.profile-update-error {
+  display: block;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 11px;
+  line-height: 1.18;
+  color: #EE3465;
+  text-align: center;
+  padding: 20px 0;
+}
