@@ -42,6 +42,7 @@ function SearchForm() {
     ariaLabel: 'поиск фильма',
     placeholder: 'Фильм',
     name: 'search',
+    required: true,
     minLength: 1,
     maxLength: 30,
   };
@@ -73,7 +74,6 @@ function SearchForm() {
         className={SEARCH_FORM_STYLE_SETTINGS.textInput}
         onChange={handleChange}
         value={values.search}
-        required={values.shortfilm ? false : true}
       />
       <FilterCheckbox
         inputClassName={SEARCH_FORM_STYLE_SETTINGS.checkboxInput}
