@@ -1,0 +1,44 @@
+.auth-navigation__nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 10px;
+}
+
+.auth-navigation__link {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 1.33;
+  color: #000000;
+  text-decoration: none;
+  padding: 8px 20px;
+  margin: 0;
+  opacity: 1;
+  transition: opacity .3s ease;
+  border-radius: 3px;
+}
+
+.auth-navigation__link:hover {
+  opacity: .7;
+}
+
+
+.auth-navigation__link_bgcolor_green {
+  background: #2BE080;
+}
+
+@media screen and (max-width: 767px) {
+  .auth-navigation__nav-list {
+    gap: 2px;
+  }
+
+  .auth-navigation__link {
+    font-size: 10px;
+    line-height: 1.6;
+    padding: 5px 12px;
+  }
+}

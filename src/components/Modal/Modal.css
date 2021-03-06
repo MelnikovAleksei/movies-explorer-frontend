@@ -1,0 +1,79 @@
+.modal {
+  display: none;
+}
+
+@media screen and (max-width: 1023px) {
+  .modal {
+    display: block;
+    box-sizing: border-box;
+  }
+
+  .modal::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000000;
+    opacity: 0.3;
+    transition: opacity 3s ease;
+  }
+
+  .modal__container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70%;
+    height: 100vh;
+  }
+
+  .modal__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 22px 22px 92px 22px;
+  }
+
+  .modal__header {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 130px;
+  }
+
+  .modal__main {
+    flex: 2 750px;
+  }
+
+  .modal__footer {
+    align-self: center;
+    flex: 1 110px;
+  }
+
+  .modal__close-button {
+    width: 22px;
+    height: 22px;
+    background-color: unset;
+    background-image: url(../../images/Modal/close-button-icon.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    border: unset;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .modal__container {
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .modal__content {
+    padding: 13px 13px 48px 13px;
+  }
+}

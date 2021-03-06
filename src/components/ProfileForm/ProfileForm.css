@@ -1,0 +1,130 @@
+.profile-form {
+  box-sizing: border-box;
+  max-width: 410px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profile-form__title {
+  box-sizing: border-box;
+  max-width: 410px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 54px 0 83px 0;
+}
+
+.profile-form__input-fieldset {
+  padding: 0;
+  margin: 0;
+  border: unset;
+  flex: 1;
+}
+
+.profile-form__input-container {
+  padding-bottom: 16px;
+  margin-bottom: 17px;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.profile-form__input-container:last-of-type {
+  padding-bottom: 16px;
+  margin-bottom: 0;
+  border-bottom: unset;
+}
+
+.profile-form__input-label {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 11px;
+  line-height: 1.18;
+  color: #000000;
+}
+
+.profile-form__input {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  width: 80%;
+  text-align: right;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 11px;
+  line-height: 1.18;
+  color: #000000;
+  background: unset;
+  border: none;
+}
+
+.profile-form__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1 252px;
+}
+
+.profile-form__submit-button {
+  width: 100%;
+  padding: 14px 0;
+  text-align: center;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.21;
+  color: #FFFFFF;
+  cursor: pointer;
+  border: unset;
+  border-radius: 3px;
+  background: rgba(255, 104, 56, 1);
+  transition: background .3s ease;
+}
+
+.profile-form__submit-button:hover {
+  background: rgba(255, 104, 56, .8);
+}
+
+.profile-form__submit-button:disabled {
+  cursor: not-allowed;
+  background: #F8F8F8;
+  color: #C2C2C2;
+}
+
+@media screen and (max-width: 1023px) {
+  .profile-form__buttons-container {
+    flex-basis: 242px;
+  }
+
+  .profile-form__title {
+    padding-top: 216px;
+    padding-bottom: 56px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile-form__container {
+    flex-basis: 397px;
+  }
+
+  .profile-form__title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+

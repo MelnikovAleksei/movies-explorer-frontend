@@ -1,0 +1,28 @@
+.profile-signout-button {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 11px;
+  line-height: 1.18;
+  color: #EE3465;
+  text-align: center;
+  padding: 8px;
+  margin: 0;
+  box-sizing: border-box;
+  background: unset;
+  border: unset;
+  cursor: pointer;
+  transition: opacity .3s ease;
+}
+
+.profile-signout-button:hover {
+  opacity: .7;
+}
+
+@media screen and (max-width: 767px) {
+  .profile-signout-button {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+}
+

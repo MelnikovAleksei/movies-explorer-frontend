@@ -1,0 +1,13 @@
+.auth-error {
+  display: block;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 10px;
+  line-height: 1.2;
+  color: #EE3465;
+  width: 100%;
+  text-align: left;
+  padding: 0;
+  box-sizing: border-box;
+}

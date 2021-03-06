@@ -1,0 +1,20 @@
+.form-question-text {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.21;
+  text-align: center;
+  color: #A0A0A0;
+  margin: 0;
+  padding: 16px 0;
+}
+
+@media screen and (max-width: 767px) {
+  .form-question-text {
+    font-size: 12px;
+    line-height: 1.25;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+}

@@ -1,0 +1,40 @@
+.about-project-article {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 110px 70px;
+  box-sizing: border-box;
+}
+
+.about-page-arcticle__items-section {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  box-sizing: border-box;
+  padding-top: 70px;
+  padding-bottom: 110px;
+}
+
+@media screen and (max-width: 1023px) {
+  .about-project-article {
+    padding: 90px 50px;
+  }
+
+  .about-page-arcticle__items-section {
+    gap: 30px;
+    padding-bottom: 93px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .about-project-article {
+    padding: 70px 18px;
+  }
+
+  .about-page-arcticle__items-section {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 56px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
