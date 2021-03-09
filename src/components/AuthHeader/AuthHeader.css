@@ -1,0 +1,25 @@
+.auth-header {
+  box-sizing: border-box;
+  max-width: 396px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 70px 0 20px 0;
+}
+
+@media screen and (max-width: 1023px) {
+  .auth-header {
+    padding-top: 232px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .auth-header {
+    text-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 30px;
+  }
+}

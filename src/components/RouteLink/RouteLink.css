@@ -1,0 +1,23 @@
+.route-link {
+  text-decoration: none;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.21;
+  text-align: center;
+  color: #FF6838;
+  opacity: 1;
+  transition: opacity .3s ease;
+}
+
+.route-link:hover {
+  opacity: .7;
+}
+
+@media screen and (max-width: 767px) {
+  .route-link {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+}

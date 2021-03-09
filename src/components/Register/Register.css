@@ -1,0 +1,9 @@
+.register {
+  height: 100vh;
+}
+
+@media screen and (max-width: 767px) {
+  .register {
+    padding: 0 30px;
+  }
+}

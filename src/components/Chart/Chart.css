@@ -1,0 +1,54 @@
+.chart {
+  background: #FFFFFF;
+  display: flex;
+}
+
+.chart__item {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart__text-container {
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart__text {
+  margin: 9px 0;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.21;
+  color: #000000;
+  align-self: center;
+}
+
+.chart__sub-text {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.21;
+  color: #A0A0A0;
+  margin: 14px 0 0 0;
+  align-self: center;
+}
+
+@media screen and (max-width: 767px) {
+  .chart__text {
+    margin: 11px 0;
+    font-size: 11px;
+    line-height: 1.18;
+  }
+
+  .chart__sub-text {
+    margin-top: 10px;
+    font-size: 11px;
+    line-height: 1.18;
+  }
+}
