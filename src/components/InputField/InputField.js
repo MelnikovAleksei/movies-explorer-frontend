@@ -14,6 +14,7 @@ function InputField(props) {
       maxLength={props.settings.maxLength}
       onChange={props.onChange}
       value={props.value || ''}
+      pattern={props.settings.regexp}
     />
   )
 }

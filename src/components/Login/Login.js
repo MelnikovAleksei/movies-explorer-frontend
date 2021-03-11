@@ -4,7 +4,11 @@ import AuthForm from '../AuthForm/AuthForm';
 
 import useFormWithValidation from '../../hooks/useFormValidation';
 
-function Login() {
+import LOGIN_ERRORS_TEXTS from '../../constants/login-errors-texts';
+
+function Login({ onSignin, authResStatus, tokenAuthResStatus, isLoadingSignin }) {
+
+  const [authErrorText, setAuthErrorText] = React.useState(null);
 
   const {
     values,
@@ -16,7 +20,8 @@ function Login() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.table(values);
+    onSignin(values);
+    setAuthErrorText(null);
     resetForm();
   };
 
@@ -62,13 +67,44 @@ function Login() {
 
   const TITLE_TEXT = 'Рады видеть!';
 
-  const AUTH_ERROR_TEXT = 'При авторизации произошла ошибка. Токен не передан или передан не в том формате.';
-
   const LOGIN_STYLE_SETTINGS = {
     main: 'login',
     header: 'register__header',
     title: 'register__title',
   };
+
+  const errorHandler = () => {
+    if (tokenAuthResStatus) {
+      switch (tokenAuthResStatus) {
+        case 400:
+          setAuthErrorText(LOGIN_ERRORS_TEXTS.TOKEN_BAD_REQUEST);
+          break;
+        case 401:
+          setAuthErrorText(LOGIN_ERRORS_TEXTS.TOKEN_UNAUTHORIZED)
+        case 500:
+        setAuthErrorText(LOGIN_ERRORS_TEXTS.INTERNAL_SERVER);
+        default:
+          break;
+      };
+    }
+
+    if (authResStatus) {
+      switch (authResStatus) {
+        case 400:
+        case 401:
+          setAuthErrorText(LOGIN_ERRORS_TEXTS.BAD_REQUEST);
+          break;
+        case 500:
+          setAuthErrorText(LOGIN_ERRORS_TEXTS.INTERNAL_SERVER);
+        default:
+          break;
+      };
+    };
+  };
+
+  React.useEffect(() => {
+    errorHandler();
+  }, [tokenAuthResStatus, authResStatus]);
 
   return (
     <main
@@ -85,7 +121,8 @@ function Login() {
         formAuthQuestionSettings={FORM_AUTH_QUESTION_SETTINGS}
         routeLinkSettings={ROUTE_LINK_SETTINGS}
         formIsValid={isValid}
-        authErrorText={AUTH_ERROR_TEXT}
+        authErrorText={authErrorText}
+        isLoadingData={isLoadingSignin}
       />
     </main>
   )

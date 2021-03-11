@@ -1,13 +1,17 @@
 import React from 'react';
 
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+
 import ProfileForm from '../ProfileForm/ProfileForm';
 
 import useFormWithValidation from '../../hooks/useFormValidation';
 
 function Profile({
-  currentUserData,
   onSignOut,
 }) {
+
+  const currentUserData = React.useContext(CurrentUserContext);
+
   const {
     values,
     errors,
