@@ -89,6 +89,7 @@ function App() {
 
   React.useEffect(() => {
     tokenCheck();
+    handleResetResStatus();
   }, [history.location])
 
   const handleSignin = (data) => {
