@@ -6,8 +6,14 @@ import useFormWithValidation from '../../hooks/useFormValidation';
 
 import LOGIN_ERRORS_TEXTS from '../../constants/login-errors-texts';
 
-function Login({ onSignin, authResStatus, tokenAuthResStatus, isLoadingSignin }) {
+function Login({
+  onSignin,
+  authResStatus,
+  tokenResStatus,
+  isLoadingSignin,
+ }) {
 
+  const [isAuthError, setIsAuthError] = React.useState(false);
   const [authErrorText, setAuthErrorText] = React.useState(null);
 
   const {
@@ -21,7 +27,6 @@ function Login({ onSignin, authResStatus, tokenAuthResStatus, isLoadingSignin })
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onSignin(values);
-    setAuthErrorText(null);
     resetForm();
   };
 
@@ -74,14 +79,17 @@ function Login({ onSignin, authResStatus, tokenAuthResStatus, isLoadingSignin })
   };
 
   const errorHandler = () => {
-    if (tokenAuthResStatus) {
-      switch (tokenAuthResStatus) {
+    if (tokenResStatus) {
+      switch (tokenResStatus) {
         case 400:
+          setIsAuthError(true);
           setAuthErrorText(LOGIN_ERRORS_TEXTS.TOKEN_BAD_REQUEST);
           break;
         case 401:
+          setIsAuthError(true);
           setAuthErrorText(LOGIN_ERRORS_TEXTS.TOKEN_UNAUTHORIZED)
         case 500:
+          setIsAuthError(true);
         setAuthErrorText(LOGIN_ERRORS_TEXTS.INTERNAL_SERVER);
         default:
           break;
@@ -92,10 +100,17 @@ function Login({ onSignin, authResStatus, tokenAuthResStatus, isLoadingSignin })
       switch (authResStatus) {
         case 400:
         case 401:
+          setIsAuthError(true);
           setAuthErrorText(LOGIN_ERRORS_TEXTS.BAD_REQUEST);
           break;
         case 500:
+          setIsAuthError(true);
           setAuthErrorText(LOGIN_ERRORS_TEXTS.INTERNAL_SERVER);
+          break;
+        case 200:
+          setIsAuthError(false);
+          setAuthErrorText('');
+          break;
         default:
           break;
       };
@@ -104,7 +119,7 @@ function Login({ onSignin, authResStatus, tokenAuthResStatus, isLoadingSignin })
 
   React.useEffect(() => {
     errorHandler();
-  }, [tokenAuthResStatus, authResStatus]);
+  }, [tokenResStatus, authResStatus]);
 
   return (
     <main
@@ -122,6 +137,7 @@ function Login({ onSignin, authResStatus, tokenAuthResStatus, isLoadingSignin })
         routeLinkSettings={ROUTE_LINK_SETTINGS}
         formIsValid={isValid}
         authErrorText={authErrorText}
+        isAuthError={isAuthError}
         isLoadingData={isLoadingSignin}
       />
     </main>

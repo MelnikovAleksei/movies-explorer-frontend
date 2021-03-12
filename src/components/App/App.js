@@ -30,11 +30,13 @@ function App() {
   const [isLoadingData, setIsLoadingData] = React.useState(true);
   const [isLoadingSignin, setIsLoadingSignin] = React.useState(false);
   const [isLoadingSignup, setIsLoadingSignup] = React.useState(false);
+  const [isLoadingUpdateCurrentUser, setIsLoadingUpdateCurrentUser] = React.useState(false);
   const [menuIsOpen, setMenuIsOpen] = React.useState(false);
   const [currentUserData, setCurrentUserData] = React.useState({});
   const [authResStatus, setAuthResStatus] = React.useState(null);
   const [tokenAuthResStatus, setTokenAuthResStatus] = React.useState(null);
   const [registrationResStatus, setRegistrationResStatus] = React.useState(null);
+  const [updateCurrentUserResStatus, setUpdateCurrentUserResStatus] = React.useState(null);
 
   const history = useHistory();
 
@@ -45,8 +47,23 @@ function App() {
     localStorage.setItem('userId', _id);
   }
 
+  const handleResetResStatus = () => {
+    if (
+      tokenAuthResStatus ||
+      updateCurrentUserResStatus ||
+      registrationResStatus ||
+      authResStatus
+    ) {
+      setUpdateCurrentUserResStatus(null);
+      setRegistrationResStatus(null);
+      setTokenAuthResStatus(null);
+      setAuthResStatus(null);
+    };
+  };
+
   const tokenCheck = React.useCallback(
     () => {
+
       const token = localStorage.getItem('jwt');
 
       if (token) {
@@ -54,10 +71,10 @@ function App() {
         mainApi.checkToken(token)
           .then(
             (res) => {
+              setTokenAuthResStatus(res.status);
               setLoggedIn(true);
               setCurrentUserData(res.data);
               saveCurrentUserDataToLocalStorage(res.data);
-              setTokenAuthResStatus(res.status);
             },
             (err) => {
               setTokenAuthResStatus(err);
@@ -67,20 +84,20 @@ function App() {
             setIsLoadingData(false);
           })
       }
-    }, [history]
+    }, []
   );
 
   React.useEffect(() => {
     tokenCheck();
-  }, [tokenCheck])
+  }, [history.location])
 
   const handleSignin = (data) => {
     setIsLoadingSignin(true);
     mainApi.authorize(data)
       .then((res) => {
+        setAuthResStatus(res.status);
         localStorage.setItem('jwt', res.data.token);
         setLoggedIn(true);
-        setAuthResStatus(res.status);
         tokenCheck();
         history.push('/movies');
       })
@@ -96,11 +113,12 @@ function App() {
     setIsLoadingSignup(true);
     mainApi.register(data)
       .then((res) => {
+        setRegistrationResStatus(res.status);
         handleSignin({
           email: data.email,
           password: data.password
         },);
-        setRegistrationResStatus(res.status);
+
       })
       .catch((err) => {
         setRegistrationResStatus(err);
@@ -116,6 +134,25 @@ function App() {
     localStorage.clear();
     history.push('/');
   };
+
+  const handleUpdateCurrenUser = (data) => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      setIsLoadingUpdateCurrentUser(true);
+      mainApi.updateCurrentUserProfile(data, token)
+        .then((res) => {
+          setCurrentUserData(res.data);
+          setUpdateCurrentUserResStatus(res.status);
+          saveCurrentUserDataToLocalStorage(res.data);
+        })
+        .catch((err) => {
+          setUpdateCurrentUserResStatus(err);
+        })
+        .finally(() => {
+          setIsLoadingUpdateCurrentUser(false);
+        })
+    }
+  }
 
   const setOpenMenu = () => {
     setMenuIsOpen(true);
@@ -185,6 +222,9 @@ function App() {
             redirectTo="/"
             loggedIn={loggedIn}
             onSignOut={handleSignOut}
+            onUpdateCurrentUser={handleUpdateCurrenUser}
+            isLoadingUpdateCurrentUser={isLoadingUpdateCurrentUser}
+            updUserResStatus={updateCurrentUserResStatus}
             component={Profile}
           />
           <Route
@@ -192,7 +232,8 @@ function App() {
           >
             <Register
               onSignup={handleSignup}
-              registrationResStatus={registrationResStatus}
+              regResStatus={registrationResStatus}
+              authResStatus={authResStatus}
               isLoadingSignup={isLoadingSignup || isLoadingData || isLoadingSignin}
             />
           </Route>
@@ -202,7 +243,7 @@ function App() {
             <Login
               onSignin={handleSignin}
               authResStatus={authResStatus}
-              tokenAuthResStatus={tokenAuthResStatus}
+              tokenResStatus={tokenAuthResStatus}
               isLoadingSignin={isLoadingSignup || isLoadingData || isLoadingSignin}
             />
           </Route>

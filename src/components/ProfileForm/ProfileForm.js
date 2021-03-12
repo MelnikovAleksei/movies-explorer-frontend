@@ -11,6 +11,7 @@ import SubmitButton from '../SubmitButton/SubmitButton';
 import ProfileEditButton from '../ProfileEditButton/ProfileEditButton';
 
 import ProfileSignoutButton from '../ProfileSignOutButton/ProfileSignOutButton';
+import Preloader from '../Preloader/Preloader';
 
 function ProfileForm({
   titleText,
@@ -27,6 +28,8 @@ function ProfileForm({
   profileEditButtonSettings,
   profileSignoutButtonSettings,
   onSignOut,
+  isLoadingData,
+  isUpdateUserProfileError,
 }) {
 
   const FORM_STYLE_SETTINGS = {
@@ -81,26 +84,29 @@ function ProfileForm({
       </div>
       <fieldset
         className={FORM_STYLE_SETTINGS.formInputFieldset}
-        disabled={!isEdited}
+        disabled={!isEdited || isLoadingData}
       >
         {formInputsMarkup}
       </fieldset>
       <div
         className={FORM_STYLE_SETTINGS.container}
       >
+        {isUpdateUserProfileError && (
+          <ProfileUpdateError
+            errorText={profileUpdateErrorText}
+          />
+        )}
         {isEdited ? (
-          <>
-            <ProfileUpdateError
-              errorText={profileUpdateErrorText}
-            />
-            <SubmitButton
-              disabled={!formIsValid}
-              settings={submitButtonSettings}
-              className={FORM_STYLE_SETTINGS.submitButton}
-            />
-          </>
+          <SubmitButton
+            disabled={!formIsValid}
+            settings={submitButtonSettings}
+            className={FORM_STYLE_SETTINGS.submitButton}
+          />
         ) : (
           <>
+            {isLoadingData && (
+              <Preloader />
+            )}
             <ProfileEditButton
               onClick={onToggleEditableProfile}
               title={profileEditButtonSettings.title}

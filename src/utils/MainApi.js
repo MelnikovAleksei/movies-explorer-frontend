@@ -39,6 +39,20 @@ class MainApi {
       },
     }).then(this._handleOriginalResponse);
   };
+
+  updateCurrentUserProfile(data, token) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email
+      })
+    }).then(this._handleOriginalResponse)
+  }
 };
 
 const OPTIONS = {

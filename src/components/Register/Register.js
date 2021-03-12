@@ -6,9 +6,14 @@ import useFormWithValidation from '../../hooks/useFormValidation';
 
 import REGISTRATION_ERRORS_TEXTS from '../../constants/registration-errors-texts';
 
-function Register({ onSignup, registrationResStatus, isLoadingSignup }) {
+function Register({
+  onSignup,
+  regResStatus,
+  isLoadingSignup,
+}) {
 
-  const [registrationErrorText, setRegistrationErrorText] = React.useState(null);
+  const [isRegistrationError, setIsRegistrationError] = React.useState(false);
+  const [registrationErrorText, setRegistrationErrorText] = React.useState('');
 
   const {
     values,
@@ -21,7 +26,6 @@ function Register({ onSignup, registrationResStatus, isLoadingSignup }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onSignup(values);
-    setRegistrationErrorText(null);
     resetForm();
   };
 
@@ -34,7 +38,7 @@ function Register({ onSignup, registrationResStatus, isLoadingSignup }) {
       placeholder: 'Имя',
       name: 'name',
       required: true,
-      regexp: '[a-zA-Z -]{1,50}',
+      regexp: '[a-zA-Z -]{2,30}',
       customErrorMessage: 'Поле name может содержать только латиницу, пробел или дефис: a-zA-Z -',
     },
     {
@@ -58,6 +62,7 @@ function Register({ onSignup, registrationResStatus, isLoadingSignup }) {
       placeholder: 'Пароль',
       name: 'password',
       minLength: 8,
+      maxLength: 30,
       required: true,
     },
   ];
@@ -83,13 +88,20 @@ function Register({ onSignup, registrationResStatus, isLoadingSignup }) {
   const TITLE_TEXT = 'Добро пожаловать!';
 
   const errorHandler = () => {
-    if (registrationResStatus) {
-      switch (registrationResStatus) {
+    if (regResStatus) {
+      switch (regResStatus) {
         case 409:
+          setIsRegistrationError(true);
           setRegistrationErrorText(REGISTRATION_ERRORS_TEXTS.CONFLICT_EMAIL);
           break;
         case 400:
-          setRegistrationErrorText(REGISTRATION_ERRORS_TEXTS.BAD_REQUEST)
+          setIsRegistrationError(true);
+          setRegistrationErrorText(REGISTRATION_ERRORS_TEXTS.BAD_REQUEST);
+          break;
+        case 200:
+          setIsRegistrationError(false);
+          setRegistrationErrorText('');
+          break;
         default:
           break;
       };
@@ -98,7 +110,7 @@ function Register({ onSignup, registrationResStatus, isLoadingSignup }) {
 
   React.useEffect(() => {
     errorHandler();
-  }, [registrationResStatus]);
+  }, [regResStatus]);
 
   return (
     <main
@@ -116,6 +128,7 @@ function Register({ onSignup, registrationResStatus, isLoadingSignup }) {
         routeLinkSettings={ROUTE_LINK_SETTINGS}
         formIsValid={isValid}
         authErrorText={registrationErrorText}
+        isAuthError={isRegistrationError}
         isLoadingData={isLoadingSignup}
       />
     </main>

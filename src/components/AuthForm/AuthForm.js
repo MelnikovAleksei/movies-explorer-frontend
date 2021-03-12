@@ -27,6 +27,7 @@ function AuthForm({
   routeLinkSettings,
   formIsValid,
   authErrorText,
+  isAuthError,
   isLoadingData,
 }) {
 
@@ -87,9 +88,12 @@ function AuthForm({
         disabled={isLoadingData}
       >
         {formInputsMarkup}
-        <AuthError
-          errorText={authErrorText}
-        />
+        {isAuthError && (
+          <AuthError
+            errorText={authErrorText}
+          />
+        )}
+
       </fieldset>
       <div
         className={FORM_STYLE_SETTINGS.buttonContainer}
