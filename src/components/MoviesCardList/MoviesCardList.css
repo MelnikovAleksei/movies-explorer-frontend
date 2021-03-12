@@ -11,7 +11,7 @@
   justify-items: center;
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1279px) {
   .movies-card-list {
     padding-left: 30px;
     padding-right: 30px;
@@ -20,12 +20,18 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1023px) {
   .movies-card-list {
     padding-top: 40px;
     padding-left: 10px;
     padding-right: 10px;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .movies-card-list {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

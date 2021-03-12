@@ -4,18 +4,38 @@ import MainArticle from '../MainArticle/MainArticle';
 
 import FavoritesButton from '../FavoritesButton/FavoritesButton';
 
-
+import getFullImageUrl from '../../utils/getFullImageUrl';
+import getTrailerUrl from '../../utils/getTrailerUrl';
+import convertTime from '../../utils/convertTime';
 
 function MoviesCard({
   data,
   locationPathname,
+  onCreateFavoriteMovie,
 }) {
 
-  const [isMarked, setIsMarked] = React.useState(data.isMarked);
+  const handleCreateFavoriteMovie = () => {
 
-  const handleMarkMovieCard = () => {
-    setIsMarked(!isMarked);
+    const fullImageUrl = getFullImageUrl(data);
+    const trailerUrl = getTrailerUrl(data);
+    const thumbnail = getFullImageUrl(data);
+
+    onCreateFavoriteMovie({
+      country: data.country || '',
+      director: data.director || '',
+      duration: data.duration || 0,
+      year: data.year || '',
+      description: data.description || '',
+      image: fullImageUrl,
+      trailer: trailerUrl,
+      nameRU: data.nameRU || '',
+      nameEN: data.nameEN || '',
+      movieId: data.id,
+      thumbnail: thumbnail,
+    });
   };
+
+  const [isMarked, setIsMarked] = React.useState(false);
 
   const MOVIES_CARD_STYLE_SETTINGS = {
     article: 'movies-card-article',
@@ -44,17 +64,17 @@ function MoviesCard({
           <h2
             className={MOVIES_CARD_STYLE_SETTINGS.title}
           >
-            {data.title}
+            {data.nameRU}
           </h2>
           <p
             className={MOVIES_CARD_STYLE_SETTINGS.subtitle}
           >
-            {data.subtitle}
+            {convertTime(data.duration)}
           </p>
         </div>
         <FavoritesButton
           className={MOVIES_CARD_STYLE_SETTINGS.favoriteButton}
-          onClick={handleMarkMovieCard}
+          onClick={handleCreateFavoriteMovie}
           locationPathname={locationPathname}
           isMarked={isMarked}
         />
@@ -64,8 +84,8 @@ function MoviesCard({
       >
         <img
           className={MOVIES_CARD_STYLE_SETTINGS.image}
-          alt={data.imageAlt}
-          src={data.imageSrc}
+          alt={data.nameEN}
+          src={getFullImageUrl(data)}
         />
       </MainArticle.Section>
     </MainArticle>

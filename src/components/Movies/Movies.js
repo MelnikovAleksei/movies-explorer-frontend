@@ -12,102 +12,68 @@ import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
 
 import MovieCardImage from '../../images/MoviesCard/movie-card-image.png';
 
-function Movies() {
+import MOVIES_ERRORS_TEXTS from '../../constants/movies-errors-texts';
+
+function Movies({
+  isLoadingData,
+  resStatus,
+  moviesData,
+  onSubmit,
+  onCreateFavoriteMovie,
+}) {
 
   let location = useLocation();
 
-  const [isLoadingData, setIsLoadingData] = React.useState(true);
+  const [isMoviesApiError, setIsMoviesApiError] = React.useState(false);
 
-  const MOVIES_CARD_LIST_DATA = [
-    {
-      id: 1,
-      title: '33 слова о дизайне',
-      subtitle: '1ч 47м',
-      imageAlt: 'кадр из фильма',
-      imageSrc: MovieCardImage,
-      isMarked: false,
-      isShortFilm: true,
-    },
-    {
-      id: 2,
-      title: '33 слова о дизайне',
-      subtitle: '1ч 47м',
-      imageAlt: 'кадр из фильма',
-      imageSrc: MovieCardImage,
-      isMarked: false,
-      isShortFilm: false,
-    },
-    {
-      id: 3,
-      title: '33 слова о дизайне',
-      subtitle: '1ч 47м',
-      imageAlt: 'кадр из фильма',
-      imageSrc: MovieCardImage,
-      isMarked: true,
-      isShortFilm: true,
-    },
-    {
-      id: 4,
-      title: '33 слова о дизайне',
-      subtitle: '1ч 47м',
-      imageAlt: 'кадр из фильма',
-      imageSrc: MovieCardImage,
-      isMarked: true,
-      isShortFilm: false,
-    },
-    {
-      id: 5,
-      title: '33 слова о дизайне',
-      subtitle: '1ч 47м',
-      imageAlt: 'кадр из фильма',
-      imageSrc: MovieCardImage,
-      isMarked: false,
-      isShortFilm: false,
-    },
-    {
-      id: 6,
-      title: '33 слова о дизайне',
-      subtitle: '1ч 47м',
-      imageAlt: 'кадр из фильма',
-      imageSrc: MovieCardImage,
-      isMarked: true,
-      isShortFilm: false,
-    },
-    {
-      id: 7,
-      title: '33 слова о дизайне',
-      subtitle: '1ч 47м',
-      imageAlt: 'кадр из фильма',
-      imageSrc: MovieCardImage,
-      isMarked: true,
-      isShortFilm: true,
-    },
-  ];
+  const handleSubmit = (data) => {
+    console.log(data);
+    onSubmit(data);
+  }
+
+  const handleErrors = () => {
+    if (resStatus) {
+      switch (resStatus) {
+        case 200:
+          setIsMoviesApiError(false);
+          break;
+        default:
+          setIsMoviesApiError(true);
+          break;
+      };
+    };
+  };
 
   React.useEffect(() => {
-    const loadingDataTimeout = setTimeout(() => {
-      setIsLoadingData(false);
-    }, 1500);
-
-    return () => {
-      clearTimeout(loadingDataTimeout);
-    };
-  }, [])
+    handleErrors();
+  }, [resStatus])
 
   return (
     <main>
-      <SearchForm />
+      <SearchForm
+        onSubmit={handleSubmit}
+      />
       {isLoadingData ? (
         <Preloader />
       ) : (
         <>
-          <MoviesCardList
-            data={MOVIES_CARD_LIST_DATA}
-            locationPathname={location.pathname}
-          />
-          <ShowMoreButton
-            onClick={() => console.log('Show more')}
-          />
+          {isMoviesApiError ? (
+            <p>
+              {MOVIES_ERRORS_TEXTS.BASE_ERROR}
+            </p>
+          ) : (
+            <>
+              <MoviesCardList
+                data={moviesData}
+                locationPathname={location.pathname}
+                onCreateFavoriteMovie={onCreateFavoriteMovie}
+              />
+              <ShowMoreButton
+                onClick={() => console.log('Show more')}
+              />
+            </>
+          )}
+
         </>
       )}
     </main>

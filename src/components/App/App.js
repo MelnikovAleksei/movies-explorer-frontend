@@ -10,6 +10,10 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import mainApi from '../../utils/MainApi';
 
+import moviesApi from '../../utils/MoviesApi';
+
+import searchFilter from '../../utils/searchFilter';
+
 import Header from '../Header/Header';
 import Modal from '../Modal/Modal';
 import MobileNavigation from '../MobileNavigation/MobileNavigation';
@@ -28,15 +32,21 @@ import Preloader from '../Preloader/Preloader';
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLoadingData, setIsLoadingData] = React.useState(true);
+  const [isLoadingMoviesData, setIsLoadingMoviesData] = React.useState(false);
   const [isLoadingSignin, setIsLoadingSignin] = React.useState(false);
   const [isLoadingSignup, setIsLoadingSignup] = React.useState(false);
   const [isLoadingUpdateCurrentUser, setIsLoadingUpdateCurrentUser] = React.useState(false);
   const [menuIsOpen, setMenuIsOpen] = React.useState(false);
+
   const [currentUserData, setCurrentUserData] = React.useState({});
+  const [moviesData, setMoviesData] = React.useState([]);
+
   const [authResStatus, setAuthResStatus] = React.useState(null);
   const [tokenAuthResStatus, setTokenAuthResStatus] = React.useState(null);
   const [registrationResStatus, setRegistrationResStatus] = React.useState(null);
   const [updateCurrentUserResStatus, setUpdateCurrentUserResStatus] = React.useState(null);
+  const [moviesApiResStatus, setMoviesApiResStatus] = React.useState(null);
+  const [createFavoriteMovieResStatus, setCreateFavoriteMovieResStatus] = React.useState(null);
 
   const history = useHistory();
 
@@ -132,7 +142,7 @@ function App() {
   const handleSignOut = (evt) => {
     evt.preventDefault();
     setLoggedIn(false);
-    localStorage.clear();
+    localStorage.removeItem('jwt');
     history.push('/');
   };
 
@@ -152,6 +162,39 @@ function App() {
         .finally(() => {
           setIsLoadingUpdateCurrentUser(false);
         })
+    };
+  };
+
+  const handleSearchMoviesData = (searchQuery) => {
+    setIsLoadingMoviesData(true);
+    moviesApi.getMoviesData()
+      .then((res) => {
+        setMoviesApiResStatus(res.status);
+        const foundFilmsArr = searchFilter(searchQuery, res.data);
+        setMoviesData(foundFilmsArr);
+      })
+      .catch((err) => {
+        console.log(err);
+        setMoviesApiResStatus(err)
+      })
+      .finally(() => {
+        setIsLoadingMoviesData(false);
+      })
+  };
+
+  const handleCreateFavoriteMovie = (data) => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      mainApi.createFavoriteMovie(data, token)
+        .then((res) => {
+          setCreateFavoriteMovieResStatus(res.status);
+        })
+        .catch((err) => {
+          setCreateFavoriteMovieResStatus(err);
+          console.log(err);
+        })
+    } else {
+      history.push('/signin');
     }
   }
 
@@ -211,6 +254,12 @@ function App() {
             redirectTo="/"
             loggedIn={loggedIn}
             component={Movies}
+            isLoadingData={isLoadingMoviesData}
+            moviesData={moviesData}
+            resStatus={moviesApiResStatus}
+            onSubmit={handleSearchMoviesData}
+            moviesData={moviesData}
+            onCreateFavoriteMovie={handleCreateFavoriteMovie}
           />
           <ProtectedRoute
             path="/saved-movies"

@@ -52,6 +52,17 @@ class MainApi {
         email: data.email
       })
     }).then(this._handleOriginalResponse)
+  };
+
+  createFavoriteMovie(data, token) {
+    return fetch(`${this._url}/movies`, {
+      method: 'POST',
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(data),
+    }).then(this._handleOriginalResponse)
   }
 };
 

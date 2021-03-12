@@ -10,7 +10,9 @@ import { ReactComponent as SearchFormIcon } from '../../images/SearchForm/search
 
 import useFormWithValidation from '../../hooks/useFormValidation';
 
-function SearchForm() {
+function SearchForm({
+  onSubmit,
+}) {
 
   const {
     values,
@@ -22,6 +24,7 @@ function SearchForm() {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     console.table(values);
+    onSubmit(values);
     resetForm();
   };
 

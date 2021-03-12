@@ -5,6 +5,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 function MoviesCardList({
   locationPathname,
   data,
+  onCreateFavoriteMovie,
 }) {
 
   const moviesCardsMarkup = data.map((item) => (
@@ -14,6 +15,7 @@ function MoviesCardList({
       <MoviesCard
         data={item}
         locationPathname={locationPathname}
+        onCreateFavoriteMovie={onCreateFavoriteMovie}
       />
     </li>
   ))
