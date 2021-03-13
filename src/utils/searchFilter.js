@@ -41,16 +41,24 @@ const searchFilter = (
   searchData.forEach(element => {
     searchKeys.forEach((key) => {
       if (element[key]) {
-        if (searchQuery.shortfilm) {
-          if ((element[searchKeyExtra] <= searchQueryExtra)) {
+        if (searchQuery.search || searchQuery.search && searchQuery.shortfilm) {
+          if (searchQuery.shortfilm && searchQuery.search) {
+            if ((element[searchKeyExtra] <= searchQueryExtra)) {
+              if (element[key].toString().toLowerCase().includes(searchQuery.search.toLowerCase())) {
+                map.set(element.id, element);
+              }
+            }
+          } else {
             if (element[key].toString().toLowerCase().includes(searchQuery.search.toLowerCase())) {
               map.set(element.id, element);
             }
           }
-        } else {
-          if (element[key].toString().toLowerCase().includes(searchQuery.search.toLowerCase())) {
-            map.set(element.id, element);
+        } else if (searchQuery.shortfilm) {
+          if ((element[searchKeyExtra] <= searchQueryExtra)) {
+            map.set(element.id, element)
           }
+        } else {
+          map.set(element.id, element);
         }
       } else {
         element[key] = 'Нет данных';
