@@ -9,7 +9,7 @@ import convertTime from '../../utils/convertTime';
 function MoviesCard({
   data,
   locationPathname,
-  onSaveFavoriteMovie,
+  onSaveMovie,
   onDeleteSavedMovie,
 }) {
 
@@ -20,7 +20,7 @@ function MoviesCard({
     if (locationPathname === '/movies') {
       if (!isSaved) {
         setIsSaved(true);
-        onSaveFavoriteMovie({
+        onSaveMovie({
           country: data.country,
           director: data.director,
           duration: data.duration,
@@ -33,6 +33,9 @@ function MoviesCard({
           movieId: data.id,
           thumbnail: data.image,
         });
+      } else {
+        onDeleteSavedMovie(data._id);
+        setIsSaved(false);
       }
     } else if (locationPathname === '/saved-movies') {
       onDeleteSavedMovie(data._id);
@@ -55,7 +58,7 @@ function MoviesCard({
 
   return (
     <MainArticle
-      id={data.id || data._id}
+      id={data._id}
       className={MOVIES_CARD_STYLE_SETTINGS.article}
     >
       <MainArticle.Header

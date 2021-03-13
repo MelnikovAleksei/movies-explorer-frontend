@@ -23,7 +23,6 @@ function SearchForm({
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.table(values);
     onSubmit(values);
     resetForm();
   };

@@ -17,7 +17,8 @@ function Movies({
   resStatus,
   moviesData,
   onSubmit,
-  onSaveFavoriteMovie,
+  onSaveMovie,
+  onDeleteSavedMovie,
 }) {
 
   let location = useLocation();
@@ -25,7 +26,6 @@ function Movies({
   const [isMoviesApiError, setIsMoviesApiError] = React.useState(false);
 
   const handleSubmit = (data) => {
-    console.log(data);
     onSubmit(data);
   }
 
@@ -64,7 +64,8 @@ function Movies({
               <MoviesCardList
                 data={moviesData}
                 locationPathname={location.pathname}
-                onSaveFavoriteMovie={onSaveFavoriteMovie}
+                onSaveMovie={onSaveMovie}
+                onDeleteSavedMovie={onDeleteSavedMovie}
               />
               <ShowMoreButton
                 onClick={() => console.log('Show more')}

@@ -6,18 +6,28 @@ import { ReactComponent as RemoveFavoritesButtonIcon } from '../../images/Movies
 
 function FavoritesButton({
   className,
-  ariaLabel,
   onClick,
   locationPathname,
   isSaved,
 }) {
 
+  const [buttonLabel, setButtonLabel] = React.useState('');
 
+  const DELETE_LABEL = 'Удалить из избранного';
+  const ADD_LEBEL = 'Добавить в избранное';
+
+  React.useEffect(() => {
+    if (locationPathname === '/saved-movies') {
+      setButtonLabel(DELETE_LABEL);
+    } else if (locationPathname === '/movies') {
+      setButtonLabel(isSaved ? DELETE_LABEL : ADD_LEBEL)
+    }
+  }, [isSaved, locationPathname])
 
   return (
     <button
       className={className}
-      aria-label={ariaLabel}
+      aria-label={buttonLabel}
       onClick={onClick}
     >
       {locationPathname === '/saved-movies' ? (

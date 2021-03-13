@@ -169,19 +169,27 @@ function App() {
   };
 
   const getSavedMoviesIds = () => {
-    const savedMovies = JSON.parse(localStorage.getItem('saved-movies'));
     const savedMoviesIds = [];
 
-    savedMovies.forEach((savedMovie) => {
+    savedMoviesData.forEach((savedMovie) => {
       savedMoviesIds.push(savedMovie.movieId);
     });
 
     return savedMoviesIds;
   };
 
-  const markAsSaved = (foundMoviesArr, savedMoviesIdsArr) => {
+  const markAsSaved = (foundMoviesArr) => {
+    const savedMoviesIdsArr = getSavedMoviesIds();
     foundMoviesArr.forEach((foundMovie) => {
       foundMovie.saved = savedMoviesIdsArr.some((savedMovieId) => savedMovieId === foundMovie.id);
+    })
+
+    savedMoviesData.forEach((savedMovie) => {
+      foundMoviesArr.forEach((foundMovie) => {
+        if (foundMovie.id === savedMovie.movieId) {
+          foundMovie._id = savedMovie._id;
+        }
+      })
     })
 
     return foundMoviesArr;
@@ -193,9 +201,7 @@ function App() {
       .then((res) => {
         setMoviesApiResStatus(res.status);
         const foundMoviesArr = searchFilter(searchQuery, res.data);
-        const savedMoviesIdsArr = getSavedMoviesIds();
-
-        setMoviesData(markAsSaved(foundMoviesArr, savedMoviesIdsArr));
+        setMoviesData(foundMoviesArr);
       })
       .catch((err) => {
         console.log(err);
@@ -230,8 +236,7 @@ function App() {
     if (token) {
       mainApi.getSavedMovies(token)
         .then((res) => {
-          setSavedMoviesData(res.data);
-          localStorage.setItem('saved-movies', JSON.stringify(res.data));
+          setSavedMoviesData(res.data.reverse());
           setGetSavedMoviesResStatus(res.status);
         })
         .catch((err) => {
@@ -241,6 +246,17 @@ function App() {
     };
   };
 
+  const markAsUnsaved = (id) => {
+    moviesData.forEach((movie) => {
+      if (movie.saved) {
+        if (movie._id === id) {
+          movie.saved = false;
+          movie._id = null;
+        }
+      }
+    })
+  }
+
   const handleDeleteSavedMovie = (id) => {
     const token = localStorage.getItem('jwt');
 
@@ -248,6 +264,7 @@ function App() {
       mainApi.deleteSavedMovie(id, token)
         .then((res) => {
           setDeleteSavedMovieResStatus(res.status);
+          markAsUnsaved(id);
         })
         .catch((err) => {
           setDeleteSavedMovieResStatus(err);
@@ -323,8 +340,9 @@ function App() {
             moviesData={moviesData}
             resStatus={moviesApiResStatus}
             onSubmit={handleSearchMoviesData}
-            moviesData={moviesData}
-            onSaveFavoriteMovie={handleSaveFavoriteMovie}
+            moviesData={markAsSaved(moviesData)}
+            onSaveMovie={handleSaveFavoriteMovie}
+            onDeleteSavedMovie={handleDeleteSavedMovie}
           />
           <ProtectedRoute
             path="/saved-movies"

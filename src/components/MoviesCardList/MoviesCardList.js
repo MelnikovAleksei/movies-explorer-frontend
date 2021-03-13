@@ -5,7 +5,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 function MoviesCardList({
   locationPathname,
   data,
-  onSaveFavoriteMovie,
+  onSaveMovie,
   onDeleteSavedMovie,
 }) {
 
@@ -16,7 +16,7 @@ function MoviesCardList({
       <MoviesCard
         data={item}
         locationPathname={locationPathname}
-        onSaveFavoriteMovie={onSaveFavoriteMovie}
+        onSaveMovie={onSaveMovie}
         onDeleteSavedMovie={onDeleteSavedMovie}
       />
     </li>
