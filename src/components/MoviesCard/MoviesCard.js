@@ -13,13 +13,10 @@ function MoviesCard({
   onDeleteSavedMovie,
 }) {
 
-  const [isSaved, setIsSaved] = React.useState(data.saved);
-
   const handleClickFavoriteButton = () => {
 
     if (locationPathname === '/movies') {
-      if (!isSaved) {
-        setIsSaved(true);
+      if (!data.saved) {
         onSaveMovie({
           country: data.country,
           director: data.director,
@@ -35,7 +32,6 @@ function MoviesCard({
         });
       } else {
         onDeleteSavedMovie(data._id);
-        setIsSaved(false);
       }
     } else if (locationPathname === '/saved-movies') {
       onDeleteSavedMovie(data._id);
@@ -82,7 +78,7 @@ function MoviesCard({
           className={MOVIES_CARD_STYLE_SETTINGS.favoriteButton}
           onClick={handleClickFavoriteButton}
           locationPathname={locationPathname}
-          isSaved={isSaved}
+          isSaved={data.saved}
         />
       </MainArticle.Header>
       <MainArticle.Section
