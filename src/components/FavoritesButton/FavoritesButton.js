@@ -9,8 +9,11 @@ function FavoritesButton({
   ariaLabel,
   onClick,
   locationPathname,
-  isMarked,
+  isSaved,
 }) {
+
+
+
   return (
     <button
       className={className}
@@ -21,7 +24,7 @@ function FavoritesButton({
         <RemoveFavoritesButtonIcon />
       )
       :
-      locationPathname === '/movies' && isMarked ? (
+      locationPathname === '/movies' && isSaved ? (
         <AddFavoritesButtonIconMarked />
       ) : (
         <AddFavoritesButtonIcon />

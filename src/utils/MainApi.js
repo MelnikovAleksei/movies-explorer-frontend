@@ -54,7 +54,7 @@ class MainApi {
     }).then(this._handleOriginalResponse)
   };
 
-  createFavoriteMovie(data, token) {
+  saveMovie(data, token) {
     return fetch(`${this._url}/movies`, {
       method: 'POST',
       headers: {
@@ -63,7 +63,27 @@ class MainApi {
       },
       body: JSON.stringify(data),
     }).then(this._handleOriginalResponse)
-  }
+  };
+
+  getSavedMovies(token) {
+    return fetch(`${this._url}/movies`, {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${token}`
+      },
+    }).then(this._handleOriginalResponse)
+  };
+
+  deleteSavedMovie(id, token) {
+    return fetch(`${this._url}/movies/${id}`, {
+      method: 'DELETE',
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${token}`
+      },
+    }).then(this._handleOriginalResponse)
+  };
 };
 
 const OPTIONS = {

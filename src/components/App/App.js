@@ -40,13 +40,16 @@ function App() {
 
   const [currentUserData, setCurrentUserData] = React.useState({});
   const [moviesData, setMoviesData] = React.useState([]);
+  const [savedMoviesData, setSavedMoviesData] = React.useState([]);
 
   const [authResStatus, setAuthResStatus] = React.useState(null);
   const [tokenAuthResStatus, setTokenAuthResStatus] = React.useState(null);
   const [registrationResStatus, setRegistrationResStatus] = React.useState(null);
   const [updateCurrentUserResStatus, setUpdateCurrentUserResStatus] = React.useState(null);
   const [moviesApiResStatus, setMoviesApiResStatus] = React.useState(null);
-  const [createFavoriteMovieResStatus, setCreateFavoriteMovieResStatus] = React.useState(null);
+  const [saveFavoriteMovieResStatus, setSaveFavoriteMovieResStatus] = React.useState(null);
+  const [getSavedMoviesResStatus, setGetSavedMoviesResStatus] = React.useState(null);
+  const [deleteSavedMovieResStatus, setDeleteSavedMovieResStatus] = React.useState(null);
 
   const history = useHistory();
 
@@ -165,13 +168,34 @@ function App() {
     };
   };
 
+  const getSavedMoviesIds = () => {
+    const savedMovies = JSON.parse(localStorage.getItem('saved-movies'));
+    const savedMoviesIds = [];
+
+    savedMovies.forEach((savedMovie) => {
+      savedMoviesIds.push(savedMovie.movieId);
+    });
+
+    return savedMoviesIds;
+  };
+
+  const markAsSaved = (foundMoviesArr, savedMoviesIdsArr) => {
+    foundMoviesArr.forEach((foundMovie) => {
+      foundMovie.saved = savedMoviesIdsArr.some((savedMovieId) => savedMovieId === foundMovie.id);
+    })
+
+    return foundMoviesArr;
+  }
+
   const handleSearchMoviesData = (searchQuery) => {
     setIsLoadingMoviesData(true);
     moviesApi.getMoviesData()
       .then((res) => {
         setMoviesApiResStatus(res.status);
-        const foundFilmsArr = searchFilter(searchQuery, res.data);
-        setMoviesData(foundFilmsArr);
+        const foundMoviesArr = searchFilter(searchQuery, res.data);
+        const savedMoviesIdsArr = getSavedMoviesIds();
+
+        setMoviesData(markAsSaved(foundMoviesArr, savedMoviesIdsArr));
       })
       .catch((err) => {
         console.log(err);
@@ -182,20 +206,57 @@ function App() {
       })
   };
 
-  const handleCreateFavoriteMovie = (data) => {
+  const handleSaveFavoriteMovie = (data) => {
     const token = localStorage.getItem('jwt');
     if (token) {
-      mainApi.createFavoriteMovie(data, token)
+      mainApi.saveMovie(data, token)
         .then((res) => {
-          setCreateFavoriteMovieResStatus(res.status);
+          setSaveFavoriteMovieResStatus(res.status);
         })
         .catch((err) => {
-          setCreateFavoriteMovieResStatus(err);
+          setSaveFavoriteMovieResStatus(err);
           console.log(err);
+        })
+        .finally(() => {
+          handleGetSavedMovies();
         })
     } else {
       history.push('/signin');
-    }
+    };
+  };
+
+  const handleGetSavedMovies = () => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      mainApi.getSavedMovies(token)
+        .then((res) => {
+          setSavedMoviesData(res.data);
+          localStorage.setItem('saved-movies', JSON.stringify(res.data));
+          setGetSavedMoviesResStatus(res.status);
+        })
+        .catch((err) => {
+          setGetSavedMoviesResStatus(err);
+          console.log(err);
+        })
+    };
+  };
+
+  const handleDeleteSavedMovie = (id) => {
+    const token = localStorage.getItem('jwt');
+
+    if (token) {
+      mainApi.deleteSavedMovie(id, token)
+        .then((res) => {
+          setDeleteSavedMovieResStatus(res.status);
+        })
+        .catch((err) => {
+          setDeleteSavedMovieResStatus(err);
+          console.log(err);
+        })
+        .finally(() => {
+          handleGetSavedMovies();
+        })
+    };
   }
 
   const setOpenMenu = () => {
@@ -216,6 +277,10 @@ function App() {
     '/signup',
     '/profile',
   ];
+
+  React.useEffect(() => {
+    handleGetSavedMovies();
+  }, [])
 
   React.useEffect(() => {
 
@@ -259,13 +324,15 @@ function App() {
             resStatus={moviesApiResStatus}
             onSubmit={handleSearchMoviesData}
             moviesData={moviesData}
-            onCreateFavoriteMovie={handleCreateFavoriteMovie}
+            onSaveFavoriteMovie={handleSaveFavoriteMovie}
           />
           <ProtectedRoute
             path="/saved-movies"
             redirectTo="/"
             loggedIn={loggedIn}
             component={SavedMovies}
+            savedMoviesData={savedMoviesData}
+            onDeleteSavedMovie={handleDeleteSavedMovie}
           />
           <ProtectedRoute
             path="/profile"

@@ -1,5 +1,8 @@
-const EXTRA_SEARCH_QUERY_MAX_SHORMFILM_DURATION = 40;
+import getFullImageUrl from '../utils/getFullImageUrl';
+import getTrailerUrl from '../utils/getTrailerUrl';
+import checkDuration from '../utils/checkDuration';
 
+const EXTRA_SEARCH_QUERY_MAX_SHORMFILM_DURATION = 40;
 
 const SEARCH_KEYS = [
   'nameEN',
@@ -8,6 +11,21 @@ const SEARCH_KEYS = [
   'country',
   'year',
   'description',
+];
+
+const KEYS_TO_CHECK = [
+  {
+    keyName: 'image',
+    checkFunc: getFullImageUrl,
+  },
+  {
+    keyName: 'trailerLink',
+    checkFunc: getTrailerUrl,
+  },
+  {
+    keyName: 'duration',
+    checkFunc: checkDuration,
+  }
 ];
 
 const EXTRA_SEARCH_KEY = 'duration';
@@ -36,7 +54,14 @@ const searchFilter = (
         }
       } else {
         element[key] = 'Нет данных';
-      }
+      };
+    })
+  });
+
+  map.forEach((element) => {
+    KEYS_TO_CHECK.forEach((key) => {
+      const checkResult = key.checkFunc(element);
+      element[key.keyName] = checkResult;
     })
   });
 

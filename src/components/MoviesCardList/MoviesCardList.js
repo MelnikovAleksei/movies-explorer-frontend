@@ -5,17 +5,19 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 function MoviesCardList({
   locationPathname,
   data,
-  onCreateFavoriteMovie,
+  onSaveFavoriteMovie,
+  onDeleteSavedMovie,
 }) {
 
   const moviesCardsMarkup = data.map((item) => (
     <li
-      key={item.id}
+      key={item.id || item._id}
     >
       <MoviesCard
         data={item}
         locationPathname={locationPathname}
-        onCreateFavoriteMovie={onCreateFavoriteMovie}
+        onSaveFavoriteMovie={onSaveFavoriteMovie}
+        onDeleteSavedMovie={onDeleteSavedMovie}
       />
     </li>
   ))

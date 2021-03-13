@@ -10,8 +10,6 @@ import SearchForm from '../SearchForm/SearchForm';
 
 import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
 
-import MovieCardImage from '../../images/MoviesCard/movie-card-image.png';
-
 import MOVIES_ERRORS_TEXTS from '../../constants/movies-errors-texts';
 
 function Movies({
@@ -19,7 +17,7 @@ function Movies({
   resStatus,
   moviesData,
   onSubmit,
-  onCreateFavoriteMovie,
+  onSaveFavoriteMovie,
 }) {
 
   let location = useLocation();
@@ -66,7 +64,7 @@ function Movies({
               <MoviesCardList
                 data={moviesData}
                 locationPathname={location.pathname}
-                onCreateFavoriteMovie={onCreateFavoriteMovie}
+                onSaveFavoriteMovie={onSaveFavoriteMovie}
               />
               <ShowMoreButton
                 onClick={() => console.log('Show more')}

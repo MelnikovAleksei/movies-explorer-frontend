@@ -4,38 +4,41 @@ import MainArticle from '../MainArticle/MainArticle';
 
 import FavoritesButton from '../FavoritesButton/FavoritesButton';
 
-import getFullImageUrl from '../../utils/getFullImageUrl';
-import getTrailerUrl from '../../utils/getTrailerUrl';
 import convertTime from '../../utils/convertTime';
 
 function MoviesCard({
   data,
   locationPathname,
-  onCreateFavoriteMovie,
+  onSaveFavoriteMovie,
+  onDeleteSavedMovie,
 }) {
 
-  const handleCreateFavoriteMovie = () => {
+  const [isSaved, setIsSaved] = React.useState(data.saved);
 
-    const fullImageUrl = getFullImageUrl(data);
-    const trailerUrl = getTrailerUrl(data);
-    const thumbnail = getFullImageUrl(data);
+  const handleClickFavoriteButton = () => {
 
-    onCreateFavoriteMovie({
-      country: data.country || '',
-      director: data.director || '',
-      duration: data.duration || 0,
-      year: data.year || '',
-      description: data.description || '',
-      image: fullImageUrl,
-      trailer: trailerUrl,
-      nameRU: data.nameRU || '',
-      nameEN: data.nameEN || '',
-      movieId: data.id,
-      thumbnail: thumbnail,
-    });
+    if (locationPathname === '/movies') {
+      if (!isSaved) {
+        setIsSaved(true);
+        onSaveFavoriteMovie({
+          country: data.country,
+          director: data.director,
+          duration: data.duration,
+          year: data.year,
+          description: data.description,
+          image: data.image,
+          trailer: data.trailerLink,
+          nameRU: data.nameRU,
+          nameEN: data.nameEN,
+          movieId: data.id,
+          thumbnail: data.image,
+        });
+      }
+    } else if (locationPathname === '/saved-movies') {
+      onDeleteSavedMovie(data._id);
+    }
   };
 
-  const [isMarked, setIsMarked] = React.useState(false);
 
   const MOVIES_CARD_STYLE_SETTINGS = {
     article: 'movies-card-article',
@@ -52,7 +55,7 @@ function MoviesCard({
 
   return (
     <MainArticle
-      id={data.id}
+      id={data.id || data._id}
       className={MOVIES_CARD_STYLE_SETTINGS.article}
     >
       <MainArticle.Header
@@ -74,9 +77,9 @@ function MoviesCard({
         </div>
         <FavoritesButton
           className={MOVIES_CARD_STYLE_SETTINGS.favoriteButton}
-          onClick={handleCreateFavoriteMovie}
+          onClick={handleClickFavoriteButton}
           locationPathname={locationPathname}
-          isMarked={isMarked}
+          isSaved={isSaved}
         />
       </MainArticle.Header>
       <MainArticle.Section
@@ -85,7 +88,7 @@ function MoviesCard({
         <img
           className={MOVIES_CARD_STYLE_SETTINGS.image}
           alt={data.nameEN}
-          src={getFullImageUrl(data)}
+          src={data.image}
         />
       </MainArticle.Section>
     </MainArticle>
