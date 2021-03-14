@@ -14,7 +14,6 @@ function Modal({
 
   const setFocusOnCloseModalButton = () => {
     const closeModalButton = modalRef.current.querySelector('button');
-
     closeModalButton.focus();
   }
 
@@ -87,7 +86,7 @@ Modal.Header = function ModalHeader(props) {
       {props.children}
       <button
         className={styleSettings.closeButton}
-        title="закрыть модальное окно меню"
+        title="закрыть модальное окно"
         onClick={onClose}
       />
     </header>

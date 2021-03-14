@@ -20,7 +20,7 @@ function Menu({
 
   return (
     <Modal
-      modalIsOpen={isOpen}
+      isOpen={isOpen}
       onClose={onClose}
       styleSettings={STYLE_SETTINGS}
     >
