@@ -114,7 +114,7 @@ function Profile({
 
   React.useEffect(() => {
     errorHandler();
-  }, [updUserResStatus]);
+  });
 
   return (
     <main

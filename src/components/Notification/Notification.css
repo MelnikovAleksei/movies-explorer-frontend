@@ -1,0 +1,28 @@
+.notification {
+  box-sizing: border-box;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 50px 70px;
+  width: 100%;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 22px;
+  line-height: 1.22;
+  color: #000000;
+  text-align: center;
+}
+
+@media screen and (max-width: 1023px) {
+  .notification {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .notification {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}

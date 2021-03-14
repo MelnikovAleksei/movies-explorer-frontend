@@ -10,7 +10,11 @@ import SearchForm from '../SearchForm/SearchForm';
 
 import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
 
+import Notification from '../Notification/Notification';
+
 import MOVIES_ERRORS_TEXTS from '../../constants/movies-errors-texts';
+
+import NO_MOVIES_FOUND_TEXT from '../../constants/no-movies-found-text';
 
 function Movies({
   isLoadingData,
@@ -19,6 +23,7 @@ function Movies({
   onSubmit,
   onSaveMovie,
   onDeleteSavedMovie,
+  isNoMoviesFound,
 }) {
 
   let location = useLocation();
@@ -51,30 +56,30 @@ function Movies({
       <SearchForm
         onSubmit={handleSubmit}
       />
-      {isLoadingData ? (
-        <Preloader />
-      ) : (
-        <>
-          {isMoviesApiError ? (
-            <p>
-              {MOVIES_ERRORS_TEXTS.BASE_ERROR}
-            </p>
-          ) : (
-            <>
-              <MoviesCardList
-                data={moviesData}
-                locationPathname={location.pathname}
-                onSaveMovie={onSaveMovie}
-                onDeleteSavedMovie={onDeleteSavedMovie}
-              />
-              <ShowMoreButton
-                onClick={() => console.log('Show more')}
-              />
-            </>
-          )}
-
-        </>
+      {!isLoadingData && isNoMoviesFound && (
+        <Notification
+          text={NO_MOVIES_FOUND_TEXT.BASE_TEXT}
+        />
       )}
+      {isLoadingData && (
+        <Preloader />
+      )}
+      {isMoviesApiError && (
+        <Notification
+          text={MOVIES_ERRORS_TEXTS.BASE_ERROR}
+        />
+      )}
+      <>
+        <MoviesCardList
+          data={moviesData}
+          locationPathname={location.pathname}
+          onSaveMovie={onSaveMovie}
+          onDeleteSavedMovie={onDeleteSavedMovie}
+        />
+        <ShowMoreButton
+          onClick={() => console.log('Show more')}
+        />
+      </>
     </main>
   )
 }

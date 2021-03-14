@@ -16,7 +16,6 @@ function SearchForm({
 
   const {
     values,
-    isValid,
     handleChange,
     resetForm
   } = useFormWithValidation({});

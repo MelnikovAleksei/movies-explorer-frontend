@@ -1,11 +1,4 @@
-const isValidUrl = (url) => {
-  try {
-    new URL(url);
-  } catch (e) {
-    return false;
-  }
-  return true;
-};
+import isValidUrl from './isValidUrl';
 
 const getTrailerUrl = (data) => {
   if (isValidUrl(data.trailerLink)) {
