@@ -87,7 +87,7 @@ class MainApi {
 };
 
 const OPTIONS = {
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.cinema-explorer.students.nomoredomains.icu',
   headers: {
     'Content-Type': 'application/json',
   },
