@@ -89,11 +89,17 @@ function MoviesCard({
       <MainArticle.Section
         className={MOVIES_CARD_STYLE_SETTINGS.imageSection}
       >
-        <img
-          className={MOVIES_CARD_STYLE_SETTINGS.image}
-          alt={movieData.nameRU || movieData.nameEN}
-          src={movieData.image}
-        />
+        <a
+          href={movieData.trailer}
+          target='_blank'
+          aria-label={`Открыть трейлер фильма "${movieData.nameRU}" на youtube.com`}
+        >
+          <img
+            className={MOVIES_CARD_STYLE_SETTINGS.image}
+            alt={movieData.nameRU || movieData.nameEN}
+            src={movieData.image}
+          />
+        </a>
       </MainArticle.Section>
     </MainArticle>
   )

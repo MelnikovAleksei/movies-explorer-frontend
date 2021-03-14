@@ -188,7 +188,6 @@ function App() {
     const token = localStorage.getItem('jwt');
 
     if (token){
-      setIsLoadingMoviesData(true);
       mainApi.getSavedMovies(token)
         .then((res) => {
           setGetSavedMoviesResStatus(res.status);
@@ -216,9 +215,6 @@ function App() {
         .catch((err) => {
           console.log(err);
           setMoviesApiResStatus(err)
-        })
-        .finally(() => {
-          setIsLoadingMoviesData(false);
         })
     }
   }

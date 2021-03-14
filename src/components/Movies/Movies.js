@@ -8,8 +8,6 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 import SearchForm from '../SearchForm/SearchForm';
 
-import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
-
 import Notification from '../Notification/Notification';
 
 import MOVIES_ERRORS_TEXTS from '../../constants/movies-errors-texts';
@@ -69,17 +67,12 @@ function Movies({
           text={MOVIES_ERRORS_TEXTS.BASE_ERROR}
         />
       )}
-      <>
-        <MoviesCardList
-          data={moviesData}
-          locationPathname={location.pathname}
-          onSaveMovie={onSaveMovie}
-          onDeleteSavedMovie={onDeleteSavedMovie}
-        />
-        <ShowMoreButton
-          onClick={() => console.log('Show more')}
-        />
-      </>
+      <MoviesCardList
+        data={moviesData}
+        locationPathname={location.pathname}
+        onSaveMovie={onSaveMovie}
+        onDeleteSavedMovie={onDeleteSavedMovie}
+      />
     </main>
   )
 }
