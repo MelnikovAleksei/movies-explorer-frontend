@@ -20,8 +20,8 @@
   top: 10%;
   left: 50%;
   transform: translateX(-50%);
-  width: 50vw;
-  height: 40vh;
+  width: 70vw;
+  height: 70vh;
 }
 
 .notification-modal__content {
