@@ -165,11 +165,32 @@ function App() {
         setIsNoMoviesFound(false);
       }
 
+      localStorage.setItem('filtered-previously-movies', JSON.stringify(markAsSaved(filteredMovies)));
+
       setMoviesData(markAsSaved(filteredMovies));
     }
   };
 
-  const handleSearchSavedMoviesData = (searchQueries = {}) => {
+  const handleGetSavedMovies = () => {
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      mainApi.getSavedMovies(token)
+        .then((res) => {
+          setGetSavedMoviesResStatus(res.status);
+
+          const savedMoviesData = res.data.reverse();
+
+          setFoundSavedMoviesData(savedMoviesData)
+        })
+        .catch((err) => {
+          console.log(err);
+          setMoviesApiResStatus(err)
+        })
+    }
+
+  }
+
+  const handleSearchSavedMoviesData = (searchQueries = {}, isAfterDelete = false) => {
     const token = localStorage.getItem('jwt');
 
     if (token){
@@ -194,7 +215,6 @@ function App() {
           } else {
             setIsNoSavedMoviesFound(false);
           }
-
           setFoundSavedMoviesData(filteredSavedMovies)
         })
         .catch((err) => {
@@ -206,7 +226,6 @@ function App() {
 
   React.useEffect(() => {
     checkToken();
-    handleSearchSavedMoviesData();
     const token = localStorage.getItem('jwt');
     if (token) {
       setIsLoadingMoviesData(true);
@@ -217,12 +236,16 @@ function App() {
           const moviesData = res.data;
 
           const localMoviesData = JSON.parse(localStorage.getItem('movies'));
+          const renderedPrevMovies = JSON.parse(localStorage.getItem('filtered-previously-movies'));
 
-          if (localMoviesData) {
-            setMoviesData(markAsSaved(localMoviesData));
+          if (renderedPrevMovies) {
+            setMoviesData(markAsSaved(renderedPrevMovies));
           } else {
-            localStorage.setItem('movies', JSON.stringify(moviesData));
-            setMoviesData(markAsSaved(moviesData));
+            if (localMoviesData) {
+              setMoviesData(markAsSaved(localMoviesData));
+            } else {
+              localStorage.setItem('movies', JSON.stringify(moviesData));
+            }
           }
         })
         .catch((err) => {
@@ -233,7 +256,7 @@ function App() {
           setIsLoadingMoviesData(false);
         })
     }
-  }, [])
+  }, [loggedIn])
 
   const getInitialSavedMoviesIds = () => {
     const initialSavedMoviesIds = [];
@@ -305,7 +328,8 @@ function App() {
           console.log(err);
         })
         .finally(() => {
-          handleSearchSavedMoviesData();
+          const isAfterDelete = true;
+          handleSearchSavedMoviesData(isAfterDelete);
         })
     };
   }
