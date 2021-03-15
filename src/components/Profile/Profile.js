@@ -94,7 +94,7 @@ function Profile({
 
   React.useEffect(() => {
     setFormIsValid(isValid);
-  }, [isValid])
+  }, [isValid, values])
 
   React.useEffect(() => {
     if (currentUserData.name === values.name && currentUserData.email === values.email) {
