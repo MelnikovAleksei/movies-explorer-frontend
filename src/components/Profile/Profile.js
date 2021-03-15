@@ -19,6 +19,7 @@ function Profile({
 
   const [isUpdateUserProfileError, setIsUpdateUserProfileError] = React.useState(false);
   const [updateUserProfileErrorText, setUpdateUserProfileErrorText] = React.useState('');
+  const [formIsValid, setFormIsValid] = React.useState(false);
 
   const {
     values,
@@ -26,7 +27,7 @@ function Profile({
     isValid,
     handleChange,
     resetForm
-  } = useFormWithValidation({currentUserData});
+  } = useFormWithValidation({});
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -91,6 +92,16 @@ function Profile({
     }
   }, [currentUserData, resetForm])
 
+  React.useEffect(() => {
+    setFormIsValid(isValid);
+  }, [isValid])
+
+  React.useEffect(() => {
+    if (currentUserData.name === values.name && currentUserData.email === values.email) {
+      setFormIsValid(false);
+    }
+  }, [currentUserData, values])
+
   const errorHandler = () => {
     if (updUserResStatus) {
       switch (updUserResStatus) {
@@ -128,7 +139,7 @@ function Profile({
         errors={errors}
         onSubmit={handleSubmit}
         submitButtonSettings={SUBMIT_BUTTON_SETTINGS}
-        formIsValid={isValid}
+        formIsValid={formIsValid}
         isEdited={isEdited}
         onToggleEditableProfile={handleToggleEditableProfile}
         profileEditButtonSettings={PROFILE_EDIT_BUTTON_SETTINGS}
