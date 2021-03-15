@@ -12,6 +12,19 @@ function MoviesCardList({
   onDeleteSavedMovie,
 }) {
 
+  const SIZE_WIDTH_LARGE = 1024;
+  const SIZE_WIDTH_MEDIUM = 768;
+  const SIZE_WIDTH_SMALL = 320;
+
+  const NUMBER_MOVIES_TO_RENDER_LARGE = 12;
+  const NUMBER_MOVIES_TO_RENDER_MEDIUM = 8;
+  const NUMBER_MOVIES_TO_RENDER_SMALL = 5;
+
+  const NUMBER_MOVIES_TO_ADD_LARGE = 3;
+  const NUMBER_MOVIES_TO_ADD_MEDIUM = 2;
+
+  const ZERO_NUMBER = 0;
+
   const [moviesToRender, setMoviesToRender] = React.useState([]);
   const [isShowButtonActive, setIsShowButtonActive] = React.useState(false);
   const [numberMoviesToRender, setNumberMoviesToRender] = React.useState(0);
@@ -20,20 +33,20 @@ function MoviesCardList({
   const size = useCurrentSize();
 
   const countNumberMoviesToRender = () => {
-    if (size.width >= 1024) {
-      setNumberMoviesToRender(12);
-      setNumberMoviesToAdd(3);
-    } else if (size.width <= 1024 && size.width >= 768) {
-      setNumberMoviesToRender(8);
-      setNumberMoviesToAdd(2);
-    } else if (size.width <= 767 && size.width >= 320) {
-      setNumberMoviesToRender(5);
-      setNumberMoviesToAdd(2);
+    if (size.width >= SIZE_WIDTH_LARGE) {
+      setNumberMoviesToRender(NUMBER_MOVIES_TO_RENDER_LARGE);
+      setNumberMoviesToAdd(NUMBER_MOVIES_TO_ADD_LARGE);
+    } else if (size.width < SIZE_WIDTH_LARGE && size.width >= SIZE_WIDTH_MEDIUM) {
+      setNumberMoviesToRender(NUMBER_MOVIES_TO_RENDER_MEDIUM);
+      setNumberMoviesToAdd(NUMBER_MOVIES_TO_ADD_MEDIUM);
+    } else if (size.width < SIZE_WIDTH_MEDIUM && size.width >= SIZE_WIDTH_SMALL) {
+      setNumberMoviesToRender(NUMBER_MOVIES_TO_RENDER_SMALL);
+      setNumberMoviesToAdd(NUMBER_MOVIES_TO_ADD_MEDIUM);
     };
   };
 
   const handleShowMoreMoviesButtonClick = () => {
-    setMoviesToRender(data.slice(0, moviesToRender.length + numberMoviesToAdd));
+    setMoviesToRender(data.slice(ZERO_NUMBER, moviesToRender.length + numberMoviesToAdd));
     if (moviesToRender.length >= data.length - numberMoviesToAdd) {
       setIsShowButtonActive(false);
     }
@@ -45,7 +58,7 @@ function MoviesCardList({
 
   React.useEffect(() => {
     if (locationPathname === '/movies') {
-      setMoviesToRender(data.slice(0, numberMoviesToRender));
+      setMoviesToRender(data.slice(ZERO_NUMBER, numberMoviesToRender));
       if (data.length <= numberMoviesToRender) {
         setIsShowButtonActive(false);
       } else {
