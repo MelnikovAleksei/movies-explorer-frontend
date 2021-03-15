@@ -14,7 +14,7 @@ import NO_MOVIES_FOUND_TEXT from '../../constants/no-movies-found-text';
 
 function SavedMovies({
   onDeleteSavedMovie,
-  foundSavedMoviesData,
+  savedMovies,
   isSavedMoviesEmpty,
   isLoadingData,
   handleSearchSavedMoviesData,
@@ -72,7 +72,7 @@ function SavedMovies({
         />
       )}
       <MoviesCardList
-        data={foundSavedMoviesData}
+        data={savedMovies}
         locationPathname={location.pathname}
         onDeleteSavedMovie={onDeleteSavedMovie}
       />
