@@ -106,6 +106,7 @@ function Profile({
     if (updUserResStatus) {
       switch (updUserResStatus) {
         case 400:
+        case 404:
           setIsUpdateUserProfileError(true);
           setUpdateUserProfileErrorText(UPDATE_PROFILE_ERRORS_TEXTS.BAD_REQUEST);
           break;
@@ -118,6 +119,8 @@ function Profile({
           setUpdateUserProfileErrorText('');
           break;
         default:
+          setIsUpdateUserProfileError(true);
+          setUpdateUserProfileErrorText(UPDATE_PROFILE_ERRORS_TEXTS.BASE_ERROR);
           break;
       };
     };
