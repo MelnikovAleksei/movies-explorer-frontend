@@ -1,32 +1,47 @@
 import React from 'react';
 
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+
 import ProfileForm from '../ProfileForm/ProfileForm';
 
 import useFormWithValidation from '../../hooks/useFormValidation';
 
+import UPDATE_PROFILE_ERRORS_TEXTS from '../../constants/update-profile-errors-texts';
+
 function Profile({
-  currentUserData,
   onSignOut,
+  onUpdateCurrentUser,
+  isLoadingUpdateCurrentUser,
+  updUserResStatus,
 }) {
+
+  const currentUserData = React.useContext(CurrentUserContext);
+
+  const [isUpdateUserProfileError, setIsUpdateUserProfileError] = React.useState(false);
+  const [updateUserProfileErrorText, setUpdateUserProfileErrorText] = React.useState('');
+  const [formIsValid, setFormIsValid] = React.useState(false);
+
   const {
     values,
     errors,
     isValid,
     handleChange,
     resetForm
-  } = useFormWithValidation({currentUserData});
+  } = useFormWithValidation({});
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.table(values);
+    onUpdateCurrentUser(values)
     handleToggleEditableProfile();
-    resetForm(values);
+    resetForm(currentUserData);
   };
 
   const [isEdited, setIsEdited] = React.useState(false);
 
   const handleToggleEditableProfile = () => {
     setIsEdited(!isEdited);
+    setIsUpdateUserProfileError(false);
+    setUpdateUserProfileErrorText('');
   };
 
   const SUBMIT_BUTTON_SETTINGS = {
@@ -42,9 +57,9 @@ function Profile({
       label: 'Имя',
       placeholder: 'Имя',
       name: 'name',
-      minLength: 1,
-      maxLength: 50,
       required: true,
+      regexp: '[a-zA-Z -]{2,30}',
+      customErrorMessage: 'Поле name может содержать только латиницу, пробел или дефис: a-zA-Z -',
     },
     {
       key: 2,
@@ -71,15 +86,49 @@ function Profile({
     title: 'Выйти из аккаунта',
   };
 
-  const PROFILE_UPDATE_ERROR_TEXT = 'При обновлении профиля произошла ошибка.';
-
-  const AUTH_ERROR_TEXT = 'При обновлении профиля произошла ошибка.';
-
   React.useEffect(() => {
     if (currentUserData) {
       resetForm(currentUserData);
     }
   }, [currentUserData, resetForm])
+
+  React.useEffect(() => {
+    setFormIsValid(isValid);
+  }, [isValid, values])
+
+  React.useEffect(() => {
+    if (currentUserData.name === values.name && currentUserData.email === values.email) {
+      setFormIsValid(false);
+    }
+  }, [currentUserData, values])
+
+  const errorHandler = () => {
+    if (updUserResStatus) {
+      switch (updUserResStatus) {
+        case 400:
+        case 404:
+          setIsUpdateUserProfileError(true);
+          setUpdateUserProfileErrorText(UPDATE_PROFILE_ERRORS_TEXTS.BAD_REQUEST);
+          break;
+        case 500:
+          setIsUpdateUserProfileError(true);
+          setUpdateUserProfileErrorText(UPDATE_PROFILE_ERRORS_TEXTS.INTERNAL_SERVER_ERROR)
+          break;
+        case 200:
+          setIsUpdateUserProfileError(false);
+          setUpdateUserProfileErrorText('');
+          break;
+        default:
+          setIsUpdateUserProfileError(true);
+          setUpdateUserProfileErrorText(UPDATE_PROFILE_ERRORS_TEXTS.BASE_ERROR);
+          break;
+      };
+    };
+  };
+
+  React.useEffect(() => {
+    errorHandler();
+  });
 
   return (
     <main
@@ -93,14 +142,15 @@ function Profile({
         errors={errors}
         onSubmit={handleSubmit}
         submitButtonSettings={SUBMIT_BUTTON_SETTINGS}
-        formIsValid={isValid}
-        authErrorText={AUTH_ERROR_TEXT}
+        formIsValid={formIsValid}
         isEdited={isEdited}
         onToggleEditableProfile={handleToggleEditableProfile}
         profileEditButtonSettings={PROFILE_EDIT_BUTTON_SETTINGS}
         profileSignoutButtonSettings={PROFILE_SIGNOUT_BUTTON_SETTINGS}
-        profileUpdateErrorText={PROFILE_UPDATE_ERROR_TEXT}
+        profileUpdateErrorText={updateUserProfileErrorText}
+        isUpdateUserProfileError={isUpdateUserProfileError}
         onSignOut={onSignOut}
+        isLoadingData={isLoadingUpdateCurrentUser}
       />
     </main>
   )

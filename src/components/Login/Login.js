@@ -4,7 +4,17 @@ import AuthForm from '../AuthForm/AuthForm';
 
 import useFormWithValidation from '../../hooks/useFormValidation';
 
-function Login() {
+import LOGIN_ERRORS_TEXTS from '../../constants/login-errors-texts';
+
+function Login({
+  onSignin,
+  authResStatus,
+  tokenResStatus,
+  isLoadingSignin,
+ }) {
+
+  const [isAuthError, setIsAuthError] = React.useState(false);
+  const [authErrorText, setAuthErrorText] = React.useState(null);
 
   const {
     values,
@@ -16,8 +26,7 @@ function Login() {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.table(values);
-    resetForm();
+    onSignin(values);
   };
 
   const INPUTS_DATA = [
@@ -62,13 +71,66 @@ function Login() {
 
   const TITLE_TEXT = 'Рады видеть!';
 
-  const AUTH_ERROR_TEXT = 'При авторизации произошла ошибка. Токен не передан или передан не в том формате.';
-
   const LOGIN_STYLE_SETTINGS = {
     main: 'login',
     header: 'register__header',
     title: 'register__title',
   };
+
+  const errorHandler = () => {
+    if (tokenResStatus) {
+      switch (tokenResStatus) {
+        case 400:
+          setIsAuthError(true);
+          setAuthErrorText(LOGIN_ERRORS_TEXTS.TOKEN_BAD_REQUEST);
+          break;
+        case 401:
+          setIsAuthError(true);
+          setAuthErrorText(LOGIN_ERRORS_TEXTS.TOKEN_UNAUTHORIZED)
+          break;
+        case 500:
+          setIsAuthError(true);
+          setAuthErrorText(LOGIN_ERRORS_TEXTS.INTERNAL_SERVER);
+          break;
+        case 200:
+          setIsAuthError(false);
+          setAuthErrorText('');
+          resetForm();
+          break;
+        default:
+          setIsAuthError(true);
+          setAuthErrorText(LOGIN_ERRORS_TEXTS.TOKEN_BAD_REQUEST);
+          break;
+      };
+    }
+
+    if (authResStatus) {
+      switch (authResStatus) {
+        case 400:
+        case 401:
+          setIsAuthError(true);
+          setAuthErrorText(LOGIN_ERRORS_TEXTS.BAD_REQUEST);
+          break;
+        case 500:
+          setIsAuthError(true);
+          setAuthErrorText(LOGIN_ERRORS_TEXTS.INTERNAL_SERVER);
+          break;
+        case 200:
+          setIsAuthError(false);
+          setAuthErrorText('');
+          resetForm();
+          break;
+        default:
+          setIsAuthError(true);
+          setAuthErrorText(LOGIN_ERRORS_TEXTS.BAD_REQUEST);
+          break;
+      };
+    };
+  };
+
+  React.useEffect(() => {
+    errorHandler();
+  }, [authResStatus, tokenResStatus]);
 
   return (
     <main
@@ -85,7 +147,9 @@ function Login() {
         formAuthQuestionSettings={FORM_AUTH_QUESTION_SETTINGS}
         routeLinkSettings={ROUTE_LINK_SETTINGS}
         formIsValid={isValid}
-        authErrorText={AUTH_ERROR_TEXT}
+        authErrorText={authErrorText}
+        isAuthError={isAuthError}
+        isLoadingData={isLoadingSignin}
       />
     </main>
   )

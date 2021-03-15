@@ -3,17 +3,21 @@ import { createPortal } from 'react-dom';
 
 const modalContext = createContext();
 
-function Modal({ children, modalIsOpen, onModalClose }) {
+function Modal({
+  children,
+  isOpen,
+  onClose,
+  styleSettings,
+}) {
 
   const modalRef = createRef();
 
   const setFocusOnCloseModalButton = () => {
     const closeModalButton = modalRef.current.querySelector('button');
-
     closeModalButton.focus();
   }
 
-  const keyListenersMap = new Map([['Escape', onModalClose]]);
+  const keyListenersMap = new Map([['Escape', onClose]]);
 
   useEffect(() => {
     const keyListeter = (evt) => {
@@ -33,7 +37,7 @@ function Modal({ children, modalIsOpen, onModalClose }) {
   useEffect(() => {
     const handleClickClose = (evt) => {
       if (evt.target.classList.contains('overlay')) {
-        onModalClose();
+        onClose();
       }
     }
 
@@ -44,25 +48,25 @@ function Modal({ children, modalIsOpen, onModalClose }) {
   })
 
   useEffect(() => {
-    if (modalIsOpen) {
+    if (isOpen) {
       setFocusOnCloseModalButton()
     }
-  }, [modalIsOpen])
+  }, [isOpen])
 
   return createPortal(
     <div
-      className="modal overlay"
+      className={`${styleSettings.overlay} overlay`}
       role="dialog"
       aria-modal="true"
     >
       <div
-        className="modal__container"
+        className={styleSettings.container}
       >
         <div
-          className="modal__content"
+          className={styleSettings.content}
           ref={modalRef}
         >
-          <modalContext.Provider value={{ onModalClose }}>
+          <modalContext.Provider value={{ onClose, styleSettings }}>
             {children}
           </modalContext.Provider>
         </div>
@@ -73,26 +77,28 @@ function Modal({ children, modalIsOpen, onModalClose }) {
 }
 
 Modal.Header = function ModalHeader(props) {
-  const { onModalClose } = useContext(modalContext);
+  const { onClose, styleSettings } = useContext(modalContext);
 
   return (
     <header
-      className="modal__header"
+      className={styleSettings.header}
     >
       {props.children}
       <button
-        className="modal__close-button"
-        title="закрыть модальное окно меню"
-        onClick={onModalClose}
+        className={styleSettings.closeButton}
+        title="закрыть модальное окно"
+        onClick={onClose}
       />
     </header>
   )
 }
 
 Modal.Body = function ModalBody(props) {
+  const { styleSettings } = useContext(modalContext);
+
   return (
     <main
-      className="modal__main"
+      className={styleSettings.main}
     >
       {props.children}
     </main>
@@ -100,9 +106,11 @@ Modal.Body = function ModalBody(props) {
 }
 
 Modal.Footer = function ModalFooter(props) {
+  const { styleSettings } = useContext(modalContext);
+
   return (
     <footer
-      className="modal__footer"
+      className={styleSettings.footer}
     >
       {props.children}
     </footer>

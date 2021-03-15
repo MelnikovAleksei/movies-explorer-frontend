@@ -8,108 +8,71 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 import SearchForm from '../SearchForm/SearchForm';
 
-import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
+import Notification from '../Notification/Notification';
 
-import MovieCardImage from '../../images/MoviesCard/movie-card-image.png';
+import MOVIES_ERRORS_TEXTS from '../../constants/movies-errors-texts';
 
-function Movies() {
+import NO_MOVIES_FOUND_TEXT from '../../constants/no-movies-found-text';
+
+function Movies({
+  isLoadingData,
+  resStatus,
+  moviesData,
+  onSubmit,
+  onSaveMovie,
+  onDeleteSavedMovie,
+  isNoMoviesFound,
+}) {
 
   let location = useLocation();
 
-  const [isLoadingData, setIsLoadingData] = React.useState(true);
+  const [isMoviesApiError, setIsMoviesApiError] = React.useState(false);
 
-  const MOVIES_CARD_LIST_DATA = [
-    {
-      id: 1,
-      title: '33 слова о дизайне',
-      subtitle: '1ч 47м',
-      imageAlt: 'кадр из фильма',
-      imageSrc: MovieCardImage,
-      isMarked: false,
-      isShortFilm: true,
-    },
-    {
-      id: 2,
-      title: '33 слова о дизайне',
-      subtitle: '1ч 47м',
-      imageAlt: 'кадр из фильма',
-      imageSrc: MovieCardImage,
-      isMarked: false,
-      isShortFilm: false,
-    },
-    {
-      id: 3,
-      title: '33 слова о дизайне',
-      subtitle: '1ч 47м',
-      imageAlt: 'кадр из фильма',
-      imageSrc: MovieCardImage,
-      isMarked: true,
-      isShortFilm: true,
-    },
-    {
-      id: 4,
-      title: '33 слова о дизайне',
-      subtitle: '1ч 47м',
-      imageAlt: 'кадр из фильма',
-      imageSrc: MovieCardImage,
-      isMarked: true,
-      isShortFilm: false,
-    },
-    {
-      id: 5,
-      title: '33 слова о дизайне',
-      subtitle: '1ч 47м',
-      imageAlt: 'кадр из фильма',
-      imageSrc: MovieCardImage,
-      isMarked: false,
-      isShortFilm: false,
-    },
-    {
-      id: 6,
-      title: '33 слова о дизайне',
-      subtitle: '1ч 47м',
-      imageAlt: 'кадр из фильма',
-      imageSrc: MovieCardImage,
-      isMarked: true,
-      isShortFilm: false,
-    },
-    {
-      id: 7,
-      title: '33 слова о дизайне',
-      subtitle: '1ч 47м',
-      imageAlt: 'кадр из фильма',
-      imageSrc: MovieCardImage,
-      isMarked: true,
-      isShortFilm: true,
-    },
-  ];
+  const handleSubmit = (data) => {
+    onSubmit(data);
+  }
+
+  const handleErrors = () => {
+    if (resStatus) {
+      switch (resStatus) {
+        case 200:
+          setIsMoviesApiError(false);
+          break;
+        default:
+          setIsMoviesApiError(true);
+          break;
+      };
+    };
+  };
 
   React.useEffect(() => {
-    const loadingDataTimeout = setTimeout(() => {
-      setIsLoadingData(false);
-    }, 1500);
-
-    return () => {
-      clearTimeout(loadingDataTimeout);
-    };
-  }, [])
+    handleErrors();
+  }, [resStatus])
 
   return (
     <main>
-      <SearchForm />
-      {isLoadingData ? (
-        <Preloader />
-      ) : (
-        <>
-          <MoviesCardList
-            data={MOVIES_CARD_LIST_DATA}
-            locationPathname={location.pathname}
-          />
-          <ShowMoreButton
-            onClick={() => console.log('Show more')}
-          />
-        </>
+      <SearchForm
+        onSubmit={handleSubmit}
+      />
+      {!isLoadingData && isNoMoviesFound && (
+        <Notification
+          text={NO_MOVIES_FOUND_TEXT.BASE_TEXT}
+        />
       )}
+      {isLoadingData && (
+        <Preloader />
+      )}
+      {isMoviesApiError && (
+        <Notification
+          text={MOVIES_ERRORS_TEXTS.BASE_ERROR}
+        />
+      )}
+      <MoviesCardList
+        data={moviesData}
+        locationPathname={location.pathname}
+        onSaveMovie={onSaveMovie}
+        onDeleteSavedMovie={onDeleteSavedMovie}
+      />
     </main>
   )
 }

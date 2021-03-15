@@ -10,18 +10,19 @@ import { ReactComponent as SearchFormIcon } from '../../images/SearchForm/search
 
 import useFormWithValidation from '../../hooks/useFormValidation';
 
-function SearchForm() {
+function SearchForm({
+  onSubmit,
+}) {
 
   const {
     values,
-    isValid,
     handleChange,
     resetForm
   } = useFormWithValidation({});
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.table(values);
+    onSubmit(values);
     resetForm();
   };
 
@@ -42,9 +43,8 @@ function SearchForm() {
     ariaLabel: 'поиск фильма',
     placeholder: 'Фильм',
     name: 'search',
-    minLength: 1,
     maxLength: 30,
-    required: true,
+    required: false,
   };
 
   const SHORTFILM_FILTER_CHECKBOX_INPUT_SETTINGS = {
@@ -87,7 +87,6 @@ function SearchForm() {
       <SubmitButton
         className={SEARCH_FORM_STYLE_SETTINGS.submitButton}
         settings={SUBMIT_BUTTON_SETTINGS}
-        disabled={!isValid}
       />
     </form>
   )

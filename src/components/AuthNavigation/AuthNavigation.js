@@ -9,18 +9,12 @@ const AuthNavigation = React.memo((props) => {
       title: 'Регистрация',
       link: '/signup',
       className: 'auth-navigation__link',
-      onClick: () => {
-        props.onSignup();
-      },
     },
     {
       id: 2,
       title: 'Войти',
       link: '/signin',
       className: 'auth-navigation__link auth-navigation__link_bgcolor_green',
-      onClick: () => {
-        props.onSignin();
-      },
     },
   ];
 
@@ -32,7 +26,6 @@ const AuthNavigation = React.memo((props) => {
       <NavLink
         className={item.className}
         to={item.link}
-        onClick={item.onClick}
       >
         {item.title}
       </NavLink>
