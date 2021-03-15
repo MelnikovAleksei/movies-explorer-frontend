@@ -26,7 +26,6 @@ function Register({
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onSignup(values);
-    resetForm();
   };
 
   const INPUTS_DATA = [
@@ -101,8 +100,11 @@ function Register({
         case 200:
           setIsRegistrationError(false);
           setRegistrationErrorText('');
+          resetForm();
           break;
         default:
+          setIsRegistrationError(true);
+          setRegistrationErrorText(REGISTRATION_ERRORS_TEXTS.BAD_REQUEST);
           break;
       };
     };

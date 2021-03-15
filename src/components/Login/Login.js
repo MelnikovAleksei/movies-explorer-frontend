@@ -27,7 +27,6 @@ function Login({
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onSignin(values);
-    resetForm();
   };
 
   const INPUTS_DATA = [
@@ -88,10 +87,19 @@ function Login({
         case 401:
           setIsAuthError(true);
           setAuthErrorText(LOGIN_ERRORS_TEXTS.TOKEN_UNAUTHORIZED)
+          break;
         case 500:
           setIsAuthError(true);
-        setAuthErrorText(LOGIN_ERRORS_TEXTS.INTERNAL_SERVER);
+          setAuthErrorText(LOGIN_ERRORS_TEXTS.INTERNAL_SERVER);
+          break;
+        case 200:
+          setIsAuthError(false);
+          setAuthErrorText('');
+          resetForm();
+          break;
         default:
+          setIsAuthError(true);
+          setAuthErrorText(LOGIN_ERRORS_TEXTS.TOKEN_BAD_REQUEST);
           break;
       };
     }
@@ -110,8 +118,11 @@ function Login({
         case 200:
           setIsAuthError(false);
           setAuthErrorText('');
+          resetForm();
           break;
         default:
+          setIsAuthError(true);
+          setAuthErrorText(LOGIN_ERRORS_TEXTS.BAD_REQUEST);
           break;
       };
     };
@@ -119,7 +130,7 @@ function Login({
 
   React.useEffect(() => {
     errorHandler();
-  }, [tokenResStatus, authResStatus]);
+  }, [authResStatus, tokenResStatus]);
 
   return (
     <main
