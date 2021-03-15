@@ -171,25 +171,6 @@ function App() {
     }
   };
 
-  const handleGetSavedMovies = () => {
-    const token = localStorage.getItem('jwt');
-    if (token) {
-      mainApi.getSavedMovies(token)
-        .then((res) => {
-          setGetSavedMoviesResStatus(res.status);
-
-          const savedMoviesData = res.data.reverse();
-
-          setFoundSavedMoviesData(savedMoviesData)
-        })
-        .catch((err) => {
-          console.log(err);
-          setMoviesApiResStatus(err)
-        })
-    }
-
-  }
-
   const handleSearchSavedMoviesData = (searchQueries = {}, isAfterDelete = false) => {
     const token = localStorage.getItem('jwt');
 
