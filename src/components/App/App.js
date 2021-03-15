@@ -37,7 +37,6 @@ import NotificationModal from '../NotificationModal/NotificationModal';
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [isLoadingData, setIsLoadingData] = React.useState(true);
-  const [isError, setIsError] = React.useState(false);
 
   const [menuIsOpen, setMenuIsOpen] = React.useState(false);
   const [notificationModalIsOpen, setNotificationModalIsOpen] = React.useState(false);
@@ -65,9 +64,7 @@ function App() {
   const [registrationResStatus, setRegistrationResStatus] = React.useState(null);
   const [updateCurrentUserResStatus, setUpdateCurrentUserResStatus] = React.useState(null);
   const [moviesApiResStatus, setMoviesApiResStatus] = React.useState(null);
-  const [saveFavoriteMovieResStatus, setSaveFavoriteMovieResStatus] = React.useState(null);
   const [getSavedMoviesResStatus, setGetSavedMoviesResStatus] = React.useState(null);
-  const [deleteSavedMovieResStatus, setDeleteSavedMovieResStatus] = React.useState(null);
 
   const history = useHistory();
 
@@ -158,30 +155,18 @@ function App() {
   };
 
   const handleSearchMoviesData = (searchQueries = {}) => {
-    setIsLoadingMoviesData(true);
-    moviesApi.getMoviesData()
-      .then((res) => {
-        setMoviesApiResStatus(res.status);
+    const localMoviesData = JSON.parse(localStorage.getItem('movies'));
+    if (localMoviesData) {
+      const filteredMovies = searchFilter(searchQueries, localMoviesData);
 
-        const moviesData = res.data;
+      if (filteredMovies.length === 0) {
+        setIsNoMoviesFound(true);
+      } else {
+        setIsNoMoviesFound(false);
+      }
 
-        const filteredMovies = searchFilter(searchQueries, moviesData);
-
-        if (filteredMovies.length === 0) {
-          setIsNoMoviesFound(true);
-        } else {
-          setIsNoMoviesFound(false);
-        }
-
-        setMoviesData(markAsSaved(filteredMovies));
-      })
-      .catch((err) => {
-        console.log(err);
-        setMoviesApiResStatus(err)
-      })
-      .finally(() => {
-        setIsLoadingMoviesData(false);
-      })
+      setMoviesData(markAsSaved(filteredMovies));
+    }
   };
 
   const handleSearchSavedMoviesData = (searchQueries = {}) => {
@@ -222,6 +207,32 @@ function App() {
   React.useEffect(() => {
     checkToken();
     handleSearchSavedMoviesData();
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      setIsLoadingMoviesData(true);
+      moviesApi.getMoviesData()
+        .then((res) => {
+          setMoviesApiResStatus(res.status);
+
+          const moviesData = res.data;
+
+          const localMoviesData = JSON.parse(localStorage.getItem('movies'));
+
+          if (localMoviesData) {
+            setMoviesData(markAsSaved(localMoviesData));
+          } else {
+            localStorage.setItem('movies', JSON.stringify(moviesData));
+            setMoviesData(markAsSaved(moviesData));
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setMoviesApiResStatus(err)
+        })
+        .finally(() => {
+          setIsLoadingMoviesData(false);
+        })
+    }
   }, [])
 
   const getInitialSavedMoviesIds = () => {
@@ -255,10 +266,8 @@ function App() {
     if (token) {
       mainApi.saveMovie(data, token)
         .then((res) => {
-          setSaveFavoriteMovieResStatus(res.status);
         })
         .catch((err) => {
-          setSaveFavoriteMovieResStatus(err);
           setOpenNotificationModal();
           setNotificationText(`${SAVE_MOVIE_ERROR_TEXTS.BASE_TEXT} ${err}`)
           console.log(err);
@@ -275,8 +284,8 @@ function App() {
     moviesData.forEach((movie) => {
       if (movie.saved) {
         if (movie._id === id) {
-          movie.saved = false;
-          movie._id = null;
+          delete movie.saved;
+          delete movie._id;
         }
       }
     })
@@ -288,11 +297,9 @@ function App() {
     if (token) {
       mainApi.deleteSavedMovie(id, token)
         .then((res) => {
-          setDeleteSavedMovieResStatus(res.status);
           markAsUnsaved(id);
         })
         .catch((err) => {
-          setDeleteSavedMovieResStatus(err);
           setOpenNotificationModal();
           setNotificationText(`${DELETE_MOVIE_ERROR_TEXTS.BASE_TEXT} ${err}`)
           console.log(err);
@@ -384,7 +391,7 @@ function App() {
             component={SavedMovies}
             isLoadingData={isLoadingMoviesData}
             isNoSavedMoviesFound={isNoSavedMoviesFound}
-            foundSavedMoviesData={foundSavedMoviesData}
+            savedMovies={foundSavedMoviesData}
             handleSearchSavedMoviesData={handleSearchSavedMoviesData}
             onDeleteSavedMovie={handleDeleteSavedMovie}
             getSavedMoviesResStatus={getSavedMoviesResStatus}
